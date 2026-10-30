@@ -644,7 +644,8 @@ class NumberPlateGame
 		}
 		const selected = candidates[ Math.floor( Math.random() * candidates.length ) ] ;
 		this.m_usedIndices.add( selected ) ;
-		this.m_originalDigits = String( this.m_table[ selected ][ 0 ] ).split( "" ).map( Number ) ;
+		// 4桁に満たない値は上位桁を0で埋め、「・」の桁も0として並べ替え・計算に使う。
+		this.m_originalDigits = String( this.m_table[ selected ][ 0 ] ).padStart( 4, "0" ).split( "" ).map( Number ) ;
 		this.m_phase = "play" ;
 		this.m_deadline = performance.now() + 30000 ;
 		this.m_root.classList.remove( "low-time" ) ;
@@ -708,7 +709,8 @@ class NumberPlateGame
 	{
 		const row = document.getElementById( "expression-row" ) ;
 		row.replaceChildren() ;
-		const padding = 4 - this.m_digits.length ;
+		const padding = Math.max( 0, 4 - this.m_digits.length ) ;
+		const leadingZeros = this.m_digits.findIndex( ( digit ) => digit !== 0 ) ;
 		for( let index = 0 ; index < padding ; index ++ )
 		{
 			const empty = document.createElement( "span" ) ;
@@ -744,7 +746,8 @@ class NumberPlateGame
 				const digit = document.createElement( "span" ) ;
 				digit.className = "digit" ;
 				digit.dataset.digitIndex = index ;
-				digit.textContent = index === 0 && this.m_digits[ index ] === 0 ? "・" : this.m_digits[ index ] ;
+				// 最上位から続く0だけを「・」とし、途中の0は「0」と表示する。
+				digit.textContent = leadingZeros < 0 || index < leadingZeros ? "・" : this.m_digits[ index ] ;
 				digit.title = "ドラッグして数字を交換" ;
 				row.append( digit ) ;
 			}

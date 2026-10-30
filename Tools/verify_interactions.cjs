@@ -213,7 +213,8 @@ assert.equal( game.m_bgm.m_desiredScene, "play" ) ;
 assert.equal( elements.get( "title-screen" ).hidden, true ) ;
 assert.equal( elements.get( "play-screen" ).hidden, false ) ;
 assert.equal( elements.get( "time-value" ).textContent, "30.0" ) ;
-assert.equal( elements.get( "expression-row" ).querySelectorAll( ".empty-digit" ).length, 2 ) ;
+assert.equal( elements.get( "expression-row" ).querySelectorAll( ".empty-digit" ).length, 0, "空き桁は0の数字として表示する" ) ;
+assert.equal( game.m_originalDigits.length, 4 ) ;
 
 /// <summary>記号をパレットから実際のマウス処理で挿入します。</summary>
 /// <param name="symbol">挿入する記号。</param>
@@ -509,6 +510,28 @@ for( const gap of [ 1, 2 ] )
 	assert.equal( elements.get( "question-number" ).textContent, "02" ) ;
 }
 
+// 3桁の問題の「・」は0として並べ替え・計算し、途中へ移した0は「0」と表示する。
+game.Start( 10 ) ;
+game.m_originalDigits = [ 0, 3, 5, 5 ] ;
+game.ResetExpression() ;
+assert.deepEqual( document.querySelectorAll( ".digit" ).map( ( element ) => String( element.textContent ) ), [ "・", "3", "5", "5" ] ) ;
+game.m_digits = [ 3, 0, 5, 5 ] ;
+game.RenderExpression( false ) ;
+assert.deepEqual( document.querySelectorAll( ".digit" ).map( ( element ) => String( element.textContent ) ), [ "3", "0", "5", "5" ] ) ;
+game.m_digits = [ 0, 0, 1, 9 ] ;
+game.RenderExpression( false ) ;
+assert.deepEqual( document.querySelectorAll( ".digit" ).map( ( element ) => String( element.textContent ) ), [ "・", "・", "1", "9" ] ) ;
+game.ResetExpression() ;
+DragSymbol( "*", 1 ) ;
+assert.equal( elements.get( "plate-result-value" ).textContent, "0" ) ;
+DragSymbol( "+", 2 ) ;
+assert.equal( game.m_phase, "play" ) ;
+DragSymbol( "+", 3 ) ;
+assert.equal( elements.get( "plate-result-value" ).textContent, "10" ) ;
+assert.equal( game.m_phase, "feedback" ) ;
+clock += 850 ;
+transition() ;
+
 // 4種類すべてのモードを、保存済みの式の入力と実際の正解遷移で完走する。
 const solutions = JSON.parse( fs.readFileSync( require( "node:path" ).join( __dirname, "../Documents/難易度別解答例.json" ), "utf8" ) ) ;
 for( const total of [ 10, 20, 50, 100 ] )
@@ -516,7 +539,7 @@ for( const total of [ 10, 20, 50, 100 ] )
 	game.Start( total ) ;
 	for( let question = 1 ; question <= total ; question ++ )
 	{
-		const value = game.m_originalDigits.join( "" ) ;
+		const value = String( Number( game.m_originalDigits.join( "" ) ) ) ;
 		const expression = solutions[ value ].expression ;
 		game.m_digits = expression.match( /[0-9]/g ).map( Number ) ;
 		game.m_gaps = Array.from( { length: game.m_digits.length + 1 }, () => [] ) ;
