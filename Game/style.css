@@ -6,11 +6,13 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; overflow: hidden; user-select: none; }
+html, body { height: 100%; overscroll-behavior: none; }
+/* タッチ操作でページのスクロール・拡大・長押しメニューが起きないようにし、指のドラッグをゲームへ渡す */
+body { margin: 0; overflow: hidden; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; touch-action: none; }
 button { font: inherit; cursor: pointer; border: 0; color: inherit; }
 button:disabled { opacity: .4; cursor: default; }
 [hidden] { display: none !important; }
-#viewport { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+#viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 #game { width: 1280px; height: 720px; position: relative; flex-shrink: 0; overflow: hidden; background: #f4f3e9; transform-origin: center; }
 .ambient { position: absolute; border: 1px solid #dce3d4; border-radius: 50%; pointer-events: none; }
 .ambient-one { width: 1100px; height: 1100px; right: -650px; top: -190px; box-shadow: 0 0 0 60px #e8ecdf70, 0 0 0 120px #e8ecdf40; }
@@ -145,3 +147,8 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .result-buttons { display: flex; align-items: center; justify-content: center; gap: 16px; }
 .secondary-button { border: 1px solid #c6cfb9; border-radius: 8px; padding: 20px 25px; background: #f7f6ec; font-size: 13px; }
 .secondary-button:hover { background: #e6ecda; }
+.rotate-notice { display: none; position: fixed; inset: 0; z-index: 1000; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #f4f3e9; color: #244f3e; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-align: center; }
+.rotate-notice span { font-size: 48px; }
+@media (orientation: portrait) and (pointer: coarse) {
+	.rotate-notice { display: flex; }
+}

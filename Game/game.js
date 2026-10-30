@@ -487,12 +487,13 @@ class NumberPlateGame
 		}
 	}
 
-	/// <summary>マウス操作と画面サイズ変更のイベントを登録します。</summary>
+	/// <summary>マウス・タッチ操作と画面サイズ変更のイベントを登録します。</summary>
 	BindEvents()
 	{
 		document.getElementById( "title-screen" ).addEventListener( "click", () =>
 		{
 			this.InitializeAudio() ;
+			this.EnterFullscreen() ;
 			document.getElementById( "selection-modal" ).hidden = false ;
 		} ) ;
 		document.getElementById( "sound-button" ).addEventListener( "click", () =>
@@ -520,8 +521,13 @@ class NumberPlateGame
 				this.ResetExpression() ;
 			}
 		} ) ;
-		this.m_root.addEventListener( "mousedown", ( event ) =>
+		// マウスとタッチを同じ処理で扱うため Pointer Events を使う。2本目以降の指は無視する。
+		this.m_root.addEventListener( "pointerdown", ( event ) =>
 		{
+			if( ! event.isPrimary )
+			{
+				return ;
+			}
 			if( event.button === 0 )
 			{
 				this.InitializeAudio() ;
@@ -529,8 +535,21 @@ class NumberPlateGame
 			}
 			this.BeginDrag( event ) ;
 		} ) ;
-		document.addEventListener( "mousemove", this.MoveDrag.bind( this ) ) ;
-		document.addEventListener( "mouseup", this.EndDrag.bind( this ) ) ;
+		document.addEventListener( "pointermove", ( event ) =>
+		{
+			if( event.isPrimary )
+			{
+				this.MoveDrag( event ) ;
+			}
+		} ) ;
+		document.addEventListener( "pointerup", ( event ) =>
+		{
+			if( event.isPrimary )
+			{
+				this.EndDrag( event ) ;
+			}
+		} ) ;
+		document.addEventListener( "pointercancel", () => this.CancelDrag() ) ;
 		window.addEventListener( "blur", () => this.CancelDrag() ) ;
 		window.addEventListener( "resize", () => this.Resize() ) ;
 		this.m_root.addEventListener( "contextmenu", this.DeleteSymbol.bind( this ) ) ;
@@ -541,6 +560,30 @@ class NumberPlateGame
 	{
 		const scale = Math.min( window.innerWidth / 1280, window.innerHeight / 720 ) ;
 		this.m_root.style.transform = `scale(${ scale })` ;
+	}
+
+	/// <summary>タッチ端末では全画面表示にし、対応ブラウザでは横向きに固定します。</summary>
+	EnterFullscreen()
+	{
+		if( ! window.matchMedia( "(pointer: coarse)" ).matches || document.fullscreenElement || document.webkitFullscreenElement )
+		{
+			return ;
+		}
+		const element = document.documentElement ;
+		const request = element.requestFullscreen ?? element.webkitRequestFullscreen ;
+
+		// iPhone の Safari は要素の全画面表示に未対応のため、通常表示のまま遊ぶ。
+		if( ! request )
+		{
+			return ;
+		}
+		Promise.resolve( request.call( element, { navigationUI: "hide" } ) )
+			.then( () => screen.orientation?.lock?.( "landscape" ) )
+			.catch( ( error ) =>
+			{
+				// 全画面・向き固定はブラウザの許可次第で失敗する。失敗しても通常表示で遊べるため記録のみとする。
+				console.info( "全画面表示または横向き固定を利用できません。", error ) ;
+			} ) ;
 	}
 
 	/// <summary>指定画面だけを表示します。</summary>

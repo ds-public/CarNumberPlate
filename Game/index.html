@@ -2,8 +2,12 @@
 <html lang="ja">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<title>ナンバープレート</title>
+		<link rel="manifest" href="manifest.json">
 		<link rel="stylesheet" href="style.css">
 		<script src="questions.js" defer></script>
 		<script src="plate-data.js" defer></script>
@@ -58,11 +62,12 @@
 					<canvas id="fireworks" width="1280" height="720" aria-hidden="true"></canvas>
 					<div class="result-content"><div id="result-eyebrow" class="eyebrow">COMPLETE</div><h2 id="result-title">クリアおめでとう</h2><p id="result-count" class="result-count"></p><div class="iq-score"><span>IQ</span><strong id="iq-value">100</strong></div><p class="score-caption">今回のひらめきスコア</p><div class="result-buttons"><button id="retry-button" class="primary-button" tabindex="-1">もう一度あそぶ <span>↗</span></button><button id="title-button" class="secondary-button" tabindex="-1">タイトルへ</button></div></div>
 				</section>
-				<footer class="game-footer"><span>NUMBER PLATE / MAKE TEN</span><span>マウス操作であそべます</span></footer>
+				<footer class="game-footer"><span>NUMBER PLATE / MAKE TEN</span><span>マウス・タッチ操作であそべます</span></footer>
 				<div id="selection-modal" class="modal" hidden>
 					<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="selection-title"><button id="close-modal" class="close-modal" aria-label="閉じる" tabindex="-1">×</button><span class="eyebrow">SELECT YOUR DRIVE</span><h2 id="selection-title">何問、挑戦する？</h2><p>1問30秒。ひらめきの先へ。</p><div class="count-options"><button data-question-count="10" tabindex="-1"><strong>10<small>問</small></strong><span>ちょっとひと走り</span></button><button data-question-count="20" tabindex="-1"><strong>20<small>問</small></strong><span>気分転換のドライブ</span></button><button data-question-count="50" tabindex="-1"><strong>50<small>問</small></strong><span>じっくり遠出</span></button><button data-question-count="100" tabindex="-1"><strong>100<small>問</small></strong><span>ひらめきの長距離走</span></button></div><p id="data-error" class="data-error" hidden></p></div>
 				</div>
 			</main>
 		</div>
+		<div class="rotate-notice" role="alert"><span>⟲</span>端末を横向きにしてお楽しみください</div>
 	</body>
 </html>
