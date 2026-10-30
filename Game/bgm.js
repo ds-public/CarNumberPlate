@@ -4,7 +4,7 @@
 class NumberPlateBgm
 {
 	/// <summary>各画面に対応するオリジナル音源。</summary>
-	static m_tracks = Object.freeze( { title: "Audio/title.wav", play: "Audio/play.wav", clear: "Audio/clear.wav", over: "Audio/over.wav" } ) ;
+	static m_tracks = Object.freeze( { title: "Audio/title.ogg", play: "Audio/play.ogg", clear: "Audio/clear.ogg", over: "Audio/over.ogg" } ) ;
 
 	/// <summary>画面間で共有する音声要素。</summary>
 	m_audio = null ;
