@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ナンバープレート</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="questions.js" defer></script>
+		<script src="plate-data.js" defer></script>
+		<script src="bgm.js" defer></script>
+		<script src="game.js" defer></script>
+	</head>
+	<body>
+		<div id="viewport">
+			<main id="game" aria-label="ナンバープレート">
+				<div class="ambient ambient-one"></div>
+				<div class="ambient ambient-two"></div>
+				<header class="brand-bar">
+					<span class="brand"><span class="brand-mark">10</span> NUMBER PLATE</span>
+					<div class="header-controls"><span class="brand-caption">ひらめきを、走らせよう。</span><button id="sound-button" class="sound-button" tabindex="-1" aria-label="サウンドを開始" aria-pressed="false">♪ SOUND</button></div>
+				</header>
+				<section id="title-screen" class="screen title-screen">
+					<div class="eyebrow">いつもの数字が、ちょっとしたパズルに。</div>
+					<h1>ナンバープレート</h1>
+					<p class="subtitle">車を運転している時に考えてるアレ</p>
+					<div class="title-plate" aria-hidden="true">
+						<i class="screw screw-left"></i><i class="screw screw-right"></i>
+						<div id="title-region" class="title-region">熊谷 123</div>
+						<div class="title-number"><small>な</small><span>1 9<span class="plate-dash">-</span>8 2</span></div>
+					</div>
+					<button id="start-button" class="primary-button" tabindex="-1">クリックしてはじめる <span>↗</span></button>
+					<p class="title-note" aria-label="数字と記号をドラッグして、答えを10に。"><span class="wave-text" aria-hidden="true">数字と記号をドラッグして、答えを<strong>10</strong>に。</span></p>
+					<p class="producer-credit">Produced by DS-Works<span class="version-label">Version 1.0.0</span></p>
+				</section>
+				<section id="play-screen" class="screen play-screen" hidden>
+					<div class="play-topline">
+						<div class="progress-label">QUESTION <strong id="question-number">01</strong><span id="question-total">/ 10</span></div>
+						<div class="time-label"><span>TIME LEFT</span><strong id="time-value">30.0</strong><small>sec</small></div>
+					</div>
+					<div id="time-track" class="time-track" role="progressbar" aria-label="残り時間" aria-valuemin="0" aria-valuemax="30" aria-valuenow="30"><div id="time-fill"></div></div>
+					<div class="play-heading"><span class="eyebrow">MAKE TEN</span><h2>この数字で、<em>10</em> をつくろう。</h2></div>
+					<div id="plate-zone" class="plate-zone">
+						<div id="plate-assembly" class="plate-assembly">
+							<div id="number-plate" class="number-plate">
+								<i class="screw screw-left"></i><i class="screw screw-right"></i>
+								<div id="region-name" class="region-name">熊谷 123</div>
+								<div class="plate-content"><span id="hiragana" class="hiragana">な</span><div id="expression-row" class="expression-row"></div></div>
+							</div>
+							<div class="plate-result"><span>=</span><strong id="plate-result-value">—</strong></div>
+						</div>
+					</div>
+					<div id="feedback" class="feedback" aria-live="polite">数字を並べ替えて、記号を差し込もう</div>
+					<div class="tool-tray"><div class="tool-label">記号をドラッグ</div><div id="symbol-palette" class="symbol-palette"></div><div class="tray-result"><span>=</span><strong id="tray-result-value">—</strong></div></div>
+					<div class="instructions"><span><b>左ドラッグ</b> 数字の交換・記号の挿入と移動</span><span><b>枠外へ</b> 記号の削除</span><span><b>記号一覧へ</b> 記号の置き換え</span><span><b>右クリック</b> 記号の削除</span></div>
+					<button id="reset-button" class="text-button reset-button" tabindex="-1">↺ この問題をリセット</button>
+				</section>
+				<section id="result-screen" class="screen result-screen" hidden>
+					<canvas id="fireworks" width="1280" height="720" aria-hidden="true"></canvas>
+					<div class="result-content"><div id="result-eyebrow" class="eyebrow">COMPLETE</div><h2 id="result-title">クリアおめでとう</h2><p id="result-count" class="result-count"></p><div class="iq-score"><span>IQ</span><strong id="iq-value">100</strong></div><p class="score-caption">今回のひらめきスコア</p><div class="result-buttons"><button id="retry-button" class="primary-button" tabindex="-1">もう一度あそぶ <span>↗</span></button><button id="title-button" class="secondary-button" tabindex="-1">タイトルへ</button></div></div>
+				</section>
+				<footer class="game-footer"><span>NUMBER PLATE / MAKE TEN</span><span>マウス操作であそべます</span></footer>
+				<div id="selection-modal" class="modal" hidden>
+					<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="selection-title"><button id="close-modal" class="close-modal" aria-label="閉じる" tabindex="-1">×</button><span class="eyebrow">SELECT YOUR DRIVE</span><h2 id="selection-title">何問、挑戦する？</h2><p>1問30秒。ひらめきの先へ。</p><div class="count-options"><button data-question-count="10" tabindex="-1"><strong>10<small>問</small></strong><span>ちょっとひと走り</span></button><button data-question-count="20" tabindex="-1"><strong>20<small>問</small></strong><span>気分転換のドライブ</span></button><button data-question-count="50" tabindex="-1"><strong>50<small>問</small></strong><span>じっくり遠出</span></button><button data-question-count="100" tabindex="-1"><strong>100<small>問</small></strong><span>ひらめきの長距離走</span></button></div><p id="data-error" class="data-error" hidden></p></div>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>
