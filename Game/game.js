@@ -394,6 +394,9 @@ class NumberPlateGame
 	/// <summary>次の問題へ進む演出のタイマー。</summary>
 	m_transitionTimer = null ;
 
+	/// <summary>タッチ操作でドラッグ中の記号を指より上に表示する距離（画面上のピクセル）。</summary>
+	static m_touchDragOffset = 64 ;
+
 	/// <summary>ドラッグ開始位置と対象。</summary>
 	m_drag = null ;
 
@@ -793,6 +796,15 @@ class NumberPlateGame
 		this.m_drag = { target: target, startX: event.clientX, startY: event.clientY, active: false } ;
 	}
 
+	/// <summary>ドラッグ中の記号を表示し、配置先を判定する縦座標を求めます。</summary>
+	/// <param name="event">ポインター移動または離したイベント。</param>
+	/// <returns>タッチ操作なら指より上にずらした縦座標。マウス操作ならカーソルの縦座標。</returns>
+	GetDragY( event )
+	{
+		// 指で記号が隠れないよう、表示と配置判定を同じだけ上へずらして見た目どおりの位置に置く。
+		return event.pointerType === "touch" ? event.clientY - NumberPlateGame.m_touchDragOffset : event.clientY ;
+	}
+
 	/// <summary>カーソルに追従し、配置候補を強調します。</summary>
 	/// <param name="event">マウス移動イベント。</param>
 	MoveDrag( event )
@@ -818,13 +830,14 @@ class NumberPlateGame
 			document.body.append( this.m_ghost ) ;
 			document.body.classList.add( "dragging" ) ;
 		}
+		const y = this.GetDragY( event ) ;
 		this.m_ghost.style.left = `${ event.clientX }px` ;
-		this.m_ghost.style.top = `${ event.clientY }px` ;
+		this.m_ghost.style.top = `${ y }px` ;
 		this.ClearDropTargets() ;
 		this.m_ghost.classList.remove( "delete-ghost" ) ;
 		if( this.m_drag.target.dataset.paletteSymbol !== undefined )
 		{
-			const placed = this.FindPlacedSymbolTarget( event.clientX, event.clientY ) ;
+			const placed = this.FindPlacedSymbolTarget( event.clientX, y ) ;
 			if( placed )
 			{
 				placed.classList.add( "replace-target" ) ;
@@ -833,19 +846,19 @@ class NumberPlateGame
 		}
 		if( this.m_drag.target.dataset.tokenId !== undefined )
 		{
-			const palette = this.FindPaletteTarget( event.clientX, event.clientY ) ;
+			const palette = this.FindPaletteTarget( event.clientX, y ) ;
 			if( palette )
 			{
 				palette.classList.add( "palette-target" ) ;
 				return ;
 			}
-			if( ! this.IsInsidePlate( event.clientX, event.clientY ) )
+			if( ! this.IsInsidePlate( event.clientX, y ) )
 			{
 				this.m_ghost.classList.add( "delete-ghost" ) ;
 				return ;
 			}
 		}
-		const candidate = this.FindDropTarget( event.clientX, event.clientY ) ;
+		const candidate = this.FindDropTarget( event.clientX, y ) ;
 		if( candidate )
 		{
 			if( this.m_drag.target.dataset.digitIndex !== undefined )
@@ -1004,10 +1017,11 @@ class NumberPlateGame
 		if( this.m_drag.active && this.m_phase === "play" && this.CheckTime() )
 		{
 			const source = this.m_drag.target ;
-			const destination = this.FindDropTarget( event.clientX, event.clientY ) ;
+			const y = this.GetDragY( event ) ;
+			const destination = this.FindDropTarget( event.clientX, y ) ;
 			const tokenId = source.dataset.tokenId === undefined ? null : Number( source.dataset.tokenId ) ;
-			const palette = tokenId === null ? null : this.FindPaletteTarget( event.clientX, event.clientY ) ;
-			const placed = source.dataset.paletteSymbol === undefined ? null : this.FindPlacedSymbolTarget( event.clientX, event.clientY ) ;
+			const palette = tokenId === null ? null : this.FindPaletteTarget( event.clientX, y ) ;
+			const placed = source.dataset.paletteSymbol === undefined ? null : this.FindPlacedSymbolTarget( event.clientX, y ) ;
 			if( placed )
 			{
 				changed = this.ReplaceSymbol( Number( placed.dataset.tokenId ), source.dataset.paletteSymbol ) ;
@@ -1016,7 +1030,7 @@ class NumberPlateGame
 			{
 				changed = this.ReplaceSymbol( tokenId, palette.dataset.paletteSymbol ) ;
 			}
-			else if( tokenId !== null && ! this.IsInsidePlate( event.clientX, event.clientY ) )
+			else if( tokenId !== null && ! this.IsInsidePlate( event.clientX, y ) )
 			{
 				changed = this.RemoveSymbol( tokenId ) ;
 				effect = "drop" ;
