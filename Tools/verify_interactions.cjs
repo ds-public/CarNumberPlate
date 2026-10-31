@@ -552,6 +552,40 @@ assert.equal( game.m_phase, "feedback" ) ;
 clock += 850 ;
 transition() ;
 
+// 配置済み記号のダブルクリック・ダブルタップで削除し、間隔が空いた2回や別の記号では削除しない。
+game.Start( 10 ) ;
+game.m_originalDigits = [ 2, 3, 3 ] ;
+game.ResetExpression() ;
+DragSymbol( "+", 1 ) ;
+DragSymbol( "+", 2 ) ;
+
+/// <summary>配置済み記号をドラッグせずにクリック・タップします。</summary>
+/// <param name="tokenId">押す記号の識別子。</param>
+function TapSymbol( tokenId )
+{
+	const target = document.querySelectorAll( "[data-token-id]" ).find( ( element ) => Number( element.dataset.tokenId ) === tokenId ) ;
+	game.BeginDrag( { button: 0, target: target, clientX: 450, clientY: 370, preventDefault: () =>
+	{
+	} } ) ;
+	game.EndDrag( { button: 0, clientX: 452, clientY: 371 } ) ;
+}
+const firstId = game.m_gaps[ 1 ][ 0 ].id ;
+const secondId = game.m_gaps[ 2 ][ 0 ].id ;
+TapSymbol( firstId ) ;
+clock += 500 ;
+TapSymbol( firstId ) ;
+assert.equal( game.m_gaps[ 1 ].length, 1, "間隔が空いた2回のクリックでは削除しない" ) ;
+clock += 100 ;
+TapSymbol( secondId ) ;
+assert.equal( game.m_gaps[ 2 ].length, 1, "別の記号を続けて押しても削除しない" ) ;
+clock += 100 ;
+const beforeDoubleTap = effects.length ;
+TapSymbol( secondId ) ;
+assert.equal( game.m_gaps[ 2 ].length, 0, "ダブルクリックで削除する" ) ;
+assert.equal( effects.length, beforeDoubleTap + 1 ) ;
+assert.equal( effects.at( -1 ), "drop" ) ;
+assert.equal( game.m_gaps[ 1 ].length, 1 ) ;
+
 // 初回プレイ時だけTipsで第1問の制限時間を止め、ゲーム開始で30秒から始める。
 storage.delete( "numberPlate.tutorialSeen" ) ;
 game.Start( 10 ) ;

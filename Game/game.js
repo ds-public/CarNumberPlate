@@ -543,6 +543,15 @@ class NumberPlateGame
 	/// <summary>タッチ操作でドラッグ中の記号を指より上に表示する距離（画面上のピクセル）。</summary>
 	static m_touchDragOffset = 64 ;
 
+	/// <summary>ダブルクリック・ダブルタップとみなす2回の操作の最大間隔（ミリ秒）。</summary>
+	static m_doubleTapInterval = 400 ;
+
+	/// <summary>ダブルクリック・ダブルタップとみなす2回の操作位置の最大距離（画面上のピクセル）。指の揺れを許容します。</summary>
+	static m_doubleTapDistance = 24 ;
+
+	/// <summary>配置済み記号を最後にクリック・タップした記号と時刻・位置。</summary>
+	m_lastTap = null ;
+
 	/// <summary>ドラッグ開始位置と対象。</summary>
 	m_drag = null ;
 
@@ -965,7 +974,7 @@ class NumberPlateGame
 				symbol.dataset.tokenId = token.id ;
 				symbol.dataset.symbol = token.symbol ;
 				symbol.textContent = this.DisplaySymbol( token.symbol ) ;
-				symbol.title = "ドラッグで移動 / 右クリックで削除" ;
+				symbol.title = "ドラッグで移動 / 右クリック・ダブルクリックで削除" ;
 				gap.append( symbol ) ;
 			}
 			row.append( gap ) ;
@@ -1234,7 +1243,7 @@ class NumberPlateGame
 		return best ;
 	}
 
-	/// <summary>数字の交換、記号の挿入・移動・置き換え・枠外への削除を行います。</summary>
+	/// <summary>数字の交換、記号の挿入・移動・置き換え・枠外への削除、ダブルクリックによる削除を行います。</summary>
 	/// <param name="event">マウスを離したイベント。</param>
 	EndDrag( event )
 	{
@@ -1283,11 +1292,39 @@ class NumberPlateGame
 				this.PlaySoundEffect( effect ) ;
 			}
 		}
+		else if( ! this.m_drag.active && this.m_drag.target.dataset.tokenId !== undefined && this.m_phase === "play" && this.CheckTime() )
+		{
+			// ドラッグせずに離した配置済み記号は、同じ記号を素早く2回押した場合だけ削除する。
+			const tokenId = Number( this.m_drag.target.dataset.tokenId ) ;
+			if( this.IsDoubleTap( tokenId, event ) )
+			{
+				changed = this.RemoveSymbol( tokenId ) ;
+				if( changed )
+				{
+					this.PlaySoundEffect( "drop" ) ;
+				}
+			}
+		}
 		this.CancelDrag() ;
 		if( this.m_phase === "play" )
 		{
 			this.RenderExpression( changed ) ;
 		}
+	}
+
+	/// <summary>同じ配置済み記号への2回目のクリック・タップが、ダブルクリック・ダブルタップに当たるか判定します。</summary>
+	/// <param name="tokenId">クリック・タップした記号の識別子。</param>
+	/// <param name="event">ボタンや指を離したイベント。</param>
+	/// <returns>前回と同じ記号を、間隔・距離の範囲内で押した場合はtrue。</returns>
+	IsDoubleTap( tokenId, event )
+	{
+		const now = performance.now() ;
+		const last = this.m_lastTap ;
+		const isDouble = last !== null && last.tokenId === tokenId && now - last.time <= NumberPlateGame.m_doubleTapInterval && Math.hypot( event.clientX - last.x, event.clientY - last.y ) <= NumberPlateGame.m_doubleTapDistance ;
+
+		// 3回連続で押しても2回目で削除済みとなるよう、判定した操作は記録から外す。
+		this.m_lastTap = isDouble ? null : { tokenId: tokenId, time: now, x: event.clientX, y: event.clientY } ;
+		return isDouble ;
 	}
 
 	/// <summary>配置位置を保ち、桁間上限と先頭の禁止記号を守って記号を置き換えます。</summary>
