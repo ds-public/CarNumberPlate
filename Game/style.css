@@ -53,8 +53,8 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .version-label { display: block; margin-top: 5px; font-size: inherit; }
 .data-delete-button { position: absolute; right: 58px; bottom: 44px; font-size: 10px; letter-spacing: 1px; color: #9aa592; padding: 4px 6px; }
 .tips-modal { z-index: 20; }
-/* 1280×720の約60％の横長フレーム。上部約70％をアニメーション領域にする */
-.tips-card { width: 768px; height: 432px; padding: 14px 20px 18px; background: #faf9f1; border-radius: 20px; box-shadow: 0 20px 80px #12332935; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: default; }
+/* 1280×720の約60％の横長フレーム（案内文2行分だけ縦を広げる）。上部約70％をアニメーション領域にする */
+.tips-card { width: 768px; height: 462px; padding: 14px 20px 18px; background: #faf9f1; border-radius: 20px; box-shadow: 0 20px 80px #12332935; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: default; }
 .tips-stage { position: relative; width: 728px; height: 274px; flex-shrink: 0; border-radius: 14px; background: #f1f1e6; overflow: hidden; }
 .tips-plate { position: absolute; left: 214px; top: 18px; width: 300px; height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #fffef5, #f1f0df); border: 3px solid #b9bfa5; border-radius: 16px; box-shadow: inset 0 0 0 4px #fffdf2, inset 0 0 0 6px #d7dac6, 0 10px 20px #31463115; color: #244f3e; }
 .tips-digit { width: 60px; font-family: "Bahnschrift", "Arial", sans-serif; font-size: 84px; font-weight: 700; line-height: 1; }
@@ -72,6 +72,7 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .tips-pointer { position: absolute; left: 264px; top: 222px; z-index: 3; width: 26px; height: 26px; border-radius: 50%; background: #244f3e55; border: 2px solid #fffdf2; animation: tips-pointer 3.6s ease-in-out infinite; }
 .tips-text { margin: 12px 0 0; font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #244f3e; }
 .tips-text strong { font-family: "Bahnschrift", sans-serif; font-size: 30px; color: #568746; margin: 0 2px; }
+.tips-subtext { margin: 6px 0 0; font-size: 15px; letter-spacing: 1px; color: #6c7c6d; }
 .tips-start-button { margin-top: auto; padding: 12px 25px; }
 @keyframes tips-ghost {
 	0% { transform: translate(0, 0); opacity: 0; }
