@@ -320,7 +320,7 @@ game.UpdateTime( clock ) ;
 assert.equal( game.m_phase, "over" ) ;
 assert.equal( game.m_bgm.m_desiredScene, "over" ) ;
 assert.equal( elements.get( "result-title" ).textContent, "ゲームオーバー" ) ;
-assert.equal( elements.get( "iq-value" ).textContent, 80 ) ;
+assert.equal( elements.get( "iq-value" ).textContent, 90 ) ;
 
 elements.get( "retry-button" ).listeners.click() ;
 game.m_correct = 9 ;
