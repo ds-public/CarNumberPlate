@@ -315,7 +315,7 @@ game.UpdateTime( clock ) ;
 assert.equal( game.m_phase, "over" ) ;
 assert.equal( game.m_bgm.m_desiredScene, "over" ) ;
 assert.equal( elements.get( "result-title" ).textContent, "ゲームオーバー" ) ;
-assert.equal( elements.get( "iq-value" ).textContent, 65 ) ;
+assert.equal( elements.get( "iq-value" ).textContent, 80 ) ;
 
 elements.get( "retry-button" ).listeners.click() ;
 game.m_correct = 9 ;
@@ -324,7 +324,7 @@ transition() ;
 assert.equal( game.m_phase, "clear" ) ;
 assert.equal( game.m_bgm.m_desiredScene, "clear" ) ;
 assert.equal( elements.get( "result-title" ).textContent, "クリアおめでとう" ) ;
-assert.equal( elements.get( "iq-value" ).textContent, 105 ) ;
+assert.equal( elements.get( "iq-value" ).textContent, 110 ) ;
 elements.get( "title-button" ).listeners.click() ;
 assert.equal( game.m_phase, "title" ) ;
 assert.equal( game.m_bgm.m_desiredScene, "title" ) ;

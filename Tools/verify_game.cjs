@@ -119,7 +119,7 @@ for( const expression of [ "10*25", "1*025", "0*125", "0/125", "2*3/0*15", "(0*1
 	assert.notEqual( Evaluate( expression ).error, null, expression ) ;
 }
 
-for( const [ correct, iq ] of [ [ 0, 56 ], [ 1, 65 ], [ 2, 73 ], [ 3, 80 ], [ 4, 86 ], [ 5, 91 ], [ 6, 95 ], [ 7, 98 ], [ 8, 100 ], [ 9, 102 ], [ 10, 105 ], [ 11, 107 ], [ 12, 109 ], [ 13, 111 ], [ 14, 113 ], [ 15, 115 ], [ 16, 116 ], [ 17, 117 ], [ 18, 118 ], [ 19, 119 ], [ 20, 120 ], [ 21, 121 ], [ 35, 135 ], [ 50, 150 ], [ 75, 175 ], [ 100, 200 ] ] )
+for( const [ correct, iq ] of [ [ 0, 70 ], [ 1, 80 ], [ 2, 90 ], [ 3, 100 ], [ 4, 103 ], [ 5, 105 ], [ 6, 106 ], [ 7, 107 ], [ 8, 108 ], [ 9, 109 ], [ 10, 110 ], [ 11, 111 ], [ 12, 112 ], [ 13, 113 ], [ 14, 114 ], [ 15, 115 ], [ 16, 116 ], [ 17, 117 ], [ 18, 118 ], [ 19, 119 ], [ 20, 120 ], [ 21, 121 ], [ 35, 135 ], [ 50, 150 ], [ 75, 175 ], [ 100, 200 ] ] )
 {
 	assert.equal( CalculateIq( correct ), iq ) ;
 }
@@ -164,7 +164,7 @@ game.m_correct = 7 ;
 game.m_deadline = performance.now() - 1 ;
 assert.equal( game.CheckTime(), false ) ;
 assert.equal( game.m_phase, "over" ) ;
-assert.equal( elements.get( "iq-value" ).textContent, 98 ) ;
+assert.equal( elements.get( "iq-value" ).textContent, 107 ) ;
 game.m_correct = 100 ;
 game.Finish( true ) ;
 assert.equal( game.m_phase, "clear" ) ;
