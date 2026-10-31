@@ -999,8 +999,10 @@ class NumberPlateGame
 		resultValue.textContent = result.value === null ? "✕" : result.value.ToDisplayString() ;
 		resultValue.className = result.value === null ? "invalid-result" : solved ? "solved-result" : "" ;
 		resultValue.title = result.error ?? result.value.ToDisplayString() ;
+		// プレートの中心を画面中央に固定したまま、右へはみ出す計算結果まで基準幅の半分（580px）に収まるよう縮小する。
 		const assembly = document.getElementById( "plate-assembly" ) ;
-		assembly.style.transform = `scale(${ Math.min( 1, 1160 / assembly.offsetWidth ) })` ;
+		const halfWidth = document.getElementById( "number-plate" ).offsetWidth / 2 + 25 + document.getElementById( "plate-result" ).offsetWidth ;
+		assembly.style.transform = `scale(${ Math.min( 1, 580 / halfWidth ) })` ;
 		if( allowAnswer && solved && this.m_phase === "play" && this.CheckTime() )
 		{
 			this.AnswerCorrect() ;
