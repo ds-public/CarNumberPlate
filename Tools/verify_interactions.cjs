@@ -6,6 +6,7 @@ const { NumberPlateGame } = require( "../Game/game.js" ) ;
 require( "../Game/questions.js" ) ;
 require( "../Game/plate-data.js" ) ;
 require( "../Game/bgm.js" ) ;
+require( "../Game/version.js" ) ;
 
 // ブラウザーの待機を使わず時間制限と正解演出を検証する時刻。
 let clock = 1000 ;
@@ -190,6 +191,7 @@ global.window = { innerWidth: 1280, innerHeight: 720, addEventListener: () =>
 
 // 初期化から画面遷移まで実際のゲームクラスを利用する。
 const game = new NumberPlateGame() ;
+assert.equal( elements.get( "version-label" ).textContent, `Version ${ globalThis.NumberPlateVersion }`, "version.js の値をタイトルに表示する" ) ;
 
 // 入力処理から発行される効果音の種類を、実際の音声処理を維持したまま記録する。
 const effects = [] ;

@@ -9,6 +9,7 @@
 		<title>ナンバープレート</title>
 		<link rel="manifest" href="manifest.json">
 		<link rel="stylesheet" href="style.css">
+		<script src="version.js" defer></script>
 		<script src="questions.js" defer></script>
 		<script src="plate-data.js" defer></script>
 		<script src="bgm.js" defer></script>
@@ -34,7 +35,7 @@
 					</div>
 					<button id="start-button" class="primary-button" tabindex="-1">クリックしてはじめる <span>↗</span></button>
 					<p class="title-note" aria-label="数字と記号をドラッグして、答えを10に。"><span class="wave-text" aria-hidden="true">数字と記号をドラッグして、答えを<strong>10</strong>に。</span></p>
-					<p class="producer-credit">Produced by DS-Works<span class="version-label">Version 1.0.1</span></p>
+					<p class="producer-credit">Produced by DS-Works<span id="version-label" class="version-label"></span></p>
 				</section>
 				<section id="play-screen" class="screen play-screen" hidden>
 					<div class="play-topline">

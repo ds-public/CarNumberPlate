@@ -426,6 +426,7 @@ class NumberPlateGame
 	{
 		this.BuildPalette() ;
 		this.BuildTitleWave() ;
+		this.ShowVersion() ;
 		this.m_bgm = new globalThis.NumberPlateBgm( ( error ) =>
 		{
 			document.getElementById( "sound-button" ).title = `音声を再生できませんでした：${ error.message }` ;
@@ -454,6 +455,13 @@ class NumberPlateGame
 				button.disabled = true ;
 			}
 		}
+	}
+
+	/// <summary>version.js のバージョン値をタイトル画面に表示します。</summary>
+	ShowVersion()
+	{
+		const version = globalThis.NumberPlateVersion ;
+		document.getElementById( "version-label" ).textContent = typeof version === "string" && version !== "" ? `Version ${ version }` : "" ;
 	}
 
 	/// <summary>案内文を文字ごとに分け、文全体に4周期の波が並ぶ位相差を付けます。</summary>
