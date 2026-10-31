@@ -29,7 +29,12 @@ button:disabled { opacity: .4; cursor: default; }
 .title-screen { text-align: center; padding-top: 102px; cursor: pointer; }
 h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900; }
 .subtitle { font-size: 17px; letter-spacing: 3px; color: #6c7c6d; margin: 0; }
-.title-plate, .number-plate { background: linear-gradient(160deg, #fffef5, #f1f0df); border: 3px solid #b9bfa5; border-radius: 19px; box-shadow: inset 0 0 0 5px #fffdf2, inset 0 0 0 7px #d7dac6, 0 18px 35px #31463118, 0 3px 0 #a3ad94; color: #244f3e; position: relative; }
+/* 実在のナンバープレートに近い色の区分。既定は白（下地白・文字深緑） */
+.title-plate, .number-plate, .tips-plate { --plate-face-light: #ffffff; --plate-face-dark: #f0f1ed; --plate-border: #b4b9b0; --plate-rim: #ffffff; --plate-line: #d5d8d1; --plate-ink: #12583a; --plate-muted: #5c7f6a; }
+[data-plate-type="yellow"] { --plate-face-light: #fbd23a; --plate-face-dark: #f0bd0d; --plate-border: #b58d12; --plate-rim: #fcdc62; --plate-line: #d6a50c; --plate-ink: #1b1b1b; --plate-muted: #5e5320; }
+[data-plate-type="green"] { --plate-face-light: #1d6844; --plate-face-dark: #135235; --plate-border: #0b3a24; --plate-rim: #237550; --plate-line: #0e432b; --plate-ink: #ffffff; --plate-muted: #a9cbb7; }
+[data-plate-type="black"] { --plate-face-light: #2b2b2b; --plate-face-dark: #121212; --plate-border: #000000; --plate-rim: #363636; --plate-line: #0a0a0a; --plate-ink: #ffffff; --plate-muted: #b5b5b5; }
+.title-plate, .number-plate { background: linear-gradient(160deg, var(--plate-face-light), var(--plate-face-dark)); border: 3px solid var(--plate-border); border-radius: 19px; box-shadow: inset 0 0 0 5px var(--plate-rim), inset 0 0 0 7px var(--plate-line), 0 18px 35px #31463118, 0 3px 0 var(--plate-border); color: var(--plate-ink); position: relative; }
 .title-plate { width: 390px; height: 185px; margin: 30px auto 32px; transform: rotate(-3deg); }
 .screw { position: absolute; top: 20px; width: 12px; height: 12px; border-radius: 50%; background: #aaaf9c; border: 2px solid #cdd0ba; box-shadow: inset 0 0 0 1px #8d9988; }
 .screw::after { content: ""; height: 1px; background: #6d7c6c; width: 7px; position: absolute; top: 4px; left: 1px; transform: rotate(-35deg); }
@@ -56,7 +61,7 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 /* 1280×720の約60％の横長フレーム（案内文2行分だけ縦を広げる）。上部約70％をアニメーション領域にする */
 .tips-card { width: 768px; height: 462px; padding: 14px 20px 18px; background: #faf9f1; border-radius: 20px; box-shadow: 0 20px 80px #12332935; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: default; }
 .tips-stage { position: relative; width: 728px; height: 274px; flex-shrink: 0; border-radius: 14px; background: #f1f1e6; overflow: hidden; }
-.tips-plate { position: absolute; left: 214px; top: 18px; width: 300px; height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #fffef5, #f1f0df); border: 3px solid #b9bfa5; border-radius: 16px; box-shadow: inset 0 0 0 4px #fffdf2, inset 0 0 0 6px #d7dac6, 0 10px 20px #31463115; color: #244f3e; }
+.tips-plate { position: absolute; left: 214px; top: 18px; width: 300px; height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, var(--plate-face-light), var(--plate-face-dark)); border: 3px solid var(--plate-border); border-radius: 16px; box-shadow: inset 0 0 0 4px var(--plate-rim), inset 0 0 0 6px var(--plate-line), 0 10px 20px #31463115; color: var(--plate-ink); }
 .tips-digit { width: 60px; font-family: "Bahnschrift", "Arial", sans-serif; font-size: 84px; font-weight: 700; line-height: 1; }
 .tips-gap { position: relative; width: 76px; height: 96px; border-radius: 6px; animation: tips-gap 3.6s ease-in-out infinite; }
 .tips-tile { width: 50px; height: 48px; border: 1px solid #d0d6c2; border-radius: 8px; background: var(--symbol-tint, #fdfcf3); color: #244f3e; font-family: "Arial", sans-serif; font-size: 26px; line-height: 1; box-shadow: 0 3px 0 #d5dac9; display: grid; place-items: center; }
@@ -149,7 +154,7 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .digit, .empty-digit { font-family: "Bahnschrift", "Arial", sans-serif; font-size: 88px; line-height: 105px; width: 62px; height: 105px; text-align: center; font-weight: 700; border-radius: 8px; flex-shrink: 0; }
 .digit { cursor: grab; }
 .digit:hover { background: #dce7d17a; }
-.empty-digit { color: #5e7860; }
+.empty-digit { color: var(--plate-muted); }
 .digit-target { background: #b7d2a799 !important; outline: 2px dashed #6d9461; }
 .number-dash { font-size: 45px; width: 14.4px; text-align: center; font-weight: 700; color: inherit; transform: translateY(-6px) scaleX(.6); pointer-events: none; flex-shrink: 0; }
 .gap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 16px; min-height: 98px; padding: 0 8px; border-radius: 6px; position: relative; }
@@ -206,6 +211,10 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .result-buttons { display: flex; align-items: center; justify-content: center; gap: 16px; }
 .secondary-button { border: 1px solid #c6cfb9; border-radius: 8px; padding: 20px 25px; background: #f7f6ec; font-size: 13px; }
 .secondary-button:hover { background: #e6ecda; }
+/* 緑・黒・黄の下地でも記号タイルの色味が変わらないよう、半透明の色の下に不透明の下地を敷く */
+.placed-symbol { background-color: #fdfcf3; background-image: linear-gradient(var(--symbol-tint, transparent), var(--symbol-tint, transparent)); }
+.placed-symbol:hover { background-color: #e5edda; background-image: linear-gradient(var(--symbol-tint, transparent), var(--symbol-tint, transparent)); }
+.placed-symbol.replace-target { background-color: #dce9ce; background-image: linear-gradient(var(--symbol-tint, transparent), var(--symbol-tint, transparent)); }
 .rotate-notice { display: none; position: fixed; inset: 0; z-index: 1000; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #f4f3e9; color: #244f3e; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-align: center; }
 .rotate-notice span { font-size: 48px; }
 @media (orientation: portrait) and (pointer: coarse) {

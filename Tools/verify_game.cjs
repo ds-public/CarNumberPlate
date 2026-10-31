@@ -129,6 +129,15 @@ for( let number = 1 ; number <= 100 ; number ++ )
 }
 assert.deepEqual( GetQuestionRange( 51, 9000 ), [ 6000, 8999 ] ) ;
 
+// ナンバープレートの色の区分は、白57％・黄40％・緑2.5％・黒0.5％の境界どおりに選ぶ。
+const random = Math.random ;
+for( const [ value, type ] of [ [ 0, "white" ], [ .5699, "white" ], [ .5701, "yellow" ], [ .9699, "yellow" ], [ .9701, "green" ], [ .9949, "green" ], [ .9951, "black" ], [ .9999, "black" ] ] )
+{
+	Math.random = () => value ;
+	assert.equal( globalThis.NumberPlateData.CreateRandomPlateType(), type, String( value ) ) ;
+}
+Math.random = random ;
+
 // DOMに依存する画面切り替えを置き換え、実際の進行メソッドを検証する。
 const elements = new Map() ;
 global.document = {
@@ -136,7 +145,7 @@ global.document = {
 	{
 		if( ! elements.has( id ) )
 		{
-			elements.set( id, { classList: { remove: DoNothing, toggle: DoNothing }, style: {}, setAttribute: DoNothing, getContext: () => ( { clearRect: DoNothing } ) } ) ;
+			elements.set( id, { classList: { remove: DoNothing, toggle: DoNothing }, style: {}, dataset: {}, setAttribute: DoNothing, getContext: () => ( { clearRect: DoNothing } ) } ) ;
 		}
 		return elements.get( id ) ;
 	},
@@ -158,6 +167,7 @@ for( let trial = 0 ; trial < 30 ; trial ++ )
 		assert( index >= start && index <= end ) ;
 		assert.equal( game.m_usedIndices.size, correct + 1 ) ;
 		assert( game.m_deadline > performance.now() + 29000 ) ;
+		assert( [ "white", "yellow", "green", "black" ].includes( elements.get( "number-plate" ).dataset.plateType ) ) ;
 	}
 }
 game.m_correct = 7 ;

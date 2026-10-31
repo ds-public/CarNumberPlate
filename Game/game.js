@@ -579,7 +579,7 @@ class NumberPlateGame
 		} ) ;
 		this.BindEvents() ;
 		this.Resize() ;
-		this.UpdatePlateHeader() ;
+		this.UpdateTitlePlate() ;
 		this.ValidateTable() ;
 		requestAnimationFrame( this.Tick.bind( this ) ) ;
 	}
@@ -770,7 +770,7 @@ class NumberPlateGame
 		this.CancelDrag() ;
 		this.m_phase = "title" ;
 		this.m_particles = [] ;
-		this.UpdatePlateHeader() ;
+		this.UpdateTitlePlate() ;
 		this.ShowScreen( "title" ) ;
 	}
 
@@ -852,23 +852,48 @@ class NumberPlateGame
 		this.m_phase = "play" ;
 		this.m_deadline = performance.now() + 30000 ;
 		this.m_root.classList.remove( "low-time" ) ;
-		this.UpdatePlateHeader() ;
+		this.UpdatePlayPlate() ;
 		document.getElementById( "question-number" ).textContent = String( this.m_correct + 1 ).padStart( 2, "0" ) ;
 		document.getElementById( "question-total" ).textContent = `/ ${ this.m_total }` ;
-
-		// 東北運輸局のかな文字一覧にある全用途のひらがなを対象にする。
-		const letters = "あいうえかきくけこさすせそたちつてとなにぬねのはひふほまみむめもやゆよらりるれろわを" ;
-		document.getElementById( "hiragana" ).textContent = letters[ Math.floor( Math.random() * letters.length ) ] ;
 		this.ResetExpression() ;
 		this.UpdateTime( performance.now() ) ;
 	}
 
-	/// <summary>地域名と分類番号を選び、タイトルとプレイ画面の上段表示に反映します。</summary>
-	UpdatePlateHeader()
+	/// <summary>プレイ画面のプレートの色の区分・地域名と分類番号・ひらがなをランダムに選びます。</summary>
+	UpdatePlayPlate()
 	{
-		const header = globalThis.NumberPlateData.CreateRandomHeader() ;
-		document.getElementById( "title-region" ).textContent = header ;
-		document.getElementById( "region-name" ).textContent = header ;
+		const data = globalThis.NumberPlateData ;
+		document.getElementById( "number-plate" ).dataset.plateType = data.CreateRandomPlateType() ;
+		document.getElementById( "region-name" ).textContent = data.CreateRandomHeader() ;
+		document.getElementById( "hiragana" ).textContent = data.CreateRandomHiragana() ;
+	}
+
+	/// <summary>タイトル画面の見本プレートの色の区分・上段表示・ひらがな・数値をランダムに選びます。</summary>
+	UpdateTitlePlate()
+	{
+		const data = globalThis.NumberPlateData ;
+		document.getElementById( "title-plate" ).dataset.plateType = data.CreateRandomPlateType() ;
+		document.getElementById( "title-region" ).textContent = data.CreateRandomHeader() ;
+		document.getElementById( "title-hiragana" ).textContent = data.CreateRandomHiragana() ;
+
+		// 数値は出題される値から選ぶ。問題データを読めない場合は初期表示の数値を残す。
+		if( ! Array.isArray( this.m_table ) || this.m_table.length === 0 || ! Array.isArray( this.m_table[ 0 ] ) )
+		{
+			return ;
+		}
+		const digits = String( this.m_table[ Math.floor( Math.random() * this.m_table.length ) ][ 0 ] ).padStart( 4, "0" ).split( "" ) ;
+		const leadingZeros = digits.findIndex( ( digit ) => digit !== "0" ) ;
+		const labels = digits.map( ( digit, index ) => index < leadingZeros ? "・" : digit ) ;
+		const parts = [ `${ labels[ 0 ] } ${ labels[ 1 ] }`, "-", `${ labels[ 2 ] } ${ labels[ 3 ] }` ] ;
+		const number = document.getElementById( "title-number-digits" ) ;
+		number.replaceChildren() ;
+		for( let index = 0 ; index < parts.length ; index ++ )
+		{
+			const part = document.createElement( "span" ) ;
+			part.className = index === 1 ? "plate-dash" : "" ;
+			part.textContent = parts[ index ] ;
+			number.append( part ) ;
+		}
 	}
 
 	/// <summary>制限時間を延ばさず式だけを出題時の状態へ戻します。</summary>

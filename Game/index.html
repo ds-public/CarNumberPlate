@@ -28,10 +28,10 @@
 					<div class="eyebrow">いつもの数字が、ちょっとしたパズルに。</div>
 					<h1>ナンバープレート</h1>
 					<p class="subtitle">車を運転している時に考えてるアレ</p>
-					<div class="title-plate" aria-hidden="true">
+					<div id="title-plate" class="title-plate" data-plate-type="white" aria-hidden="true">
 						<i class="screw screw-left"></i><i class="screw screw-right"></i>
 						<div id="title-region" class="title-region">熊谷 123</div>
-						<div class="title-number"><small>な</small><span>1 9<span class="plate-dash">-</span>8 2</span></div>
+						<div class="title-number"><small id="title-hiragana">な</small><span id="title-number-digits"><span>1 9</span><span class="plate-dash">-</span><span>8 2</span></span></div>
 					</div>
 					<button id="start-button" class="primary-button" tabindex="-1">クリックしてはじめる <span>↗</span></button>
 					<p class="title-note" aria-label="数字と記号をドラッグして、答えを10に。"><span class="wave-text" aria-hidden="true">数字と記号をドラッグして、答えを<strong>10</strong>に。</span></p>
@@ -47,7 +47,7 @@
 					<div class="play-heading"><span class="eyebrow">MAKE TEN</span><h2>この数字で、<em>10</em> をつくろう。</h2></div>
 					<div id="plate-zone" class="plate-zone">
 						<div id="plate-assembly" class="plate-assembly">
-							<div id="number-plate" class="number-plate">
+							<div id="number-plate" class="number-plate" data-plate-type="white">
 								<i class="screw screw-left"></i><i class="screw screw-right"></i>
 								<div id="region-name" class="region-name">熊谷 123</div>
 								<div class="plate-content"><span id="hiragana" class="hiragana">な</span><div id="expression-row" class="expression-row"></div></div>
@@ -71,7 +71,7 @@
 				<div id="tips-modal" class="modal tips-modal" hidden>
 					<div class="tips-card" role="dialog" aria-modal="true" aria-labelledby="tips-text">
 						<div class="tips-stage" aria-hidden="true">
-							<div class="tips-plate"><span class="tips-digit">4</span><span class="tips-gap"><span class="tips-tile tips-placed" data-symbol="+">＋</span></span><span class="tips-digit">6</span></div>
+							<div class="tips-plate" data-plate-type="white"><span class="tips-digit">4</span><span class="tips-gap"><span class="tips-tile tips-placed" data-symbol="+">＋</span></span><span class="tips-digit">6</span></div>
 							<div class="tips-result"><span>=</span><span class="tips-result-value"><span class="tips-result-before">?</span><strong class="tips-result-after">10</strong></span></div>
 							<div class="tips-palette"><span class="tips-tile" data-symbol="+">＋</span><span class="tips-tile" data-symbol="-">−</span><span class="tips-tile" data-symbol="*">×</span><span class="tips-tile" data-symbol="/">÷</span></div>
 							<span class="tips-tile tips-ghost" data-symbol="+">＋</span>

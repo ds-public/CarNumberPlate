@@ -206,6 +206,12 @@ global.localStorage = {
 const game = new NumberPlateGame() ;
 assert.equal( elements.get( "version-label" ).textContent, `Version ${ globalThis.NumberPlateVersion }`, "version.js の値をタイトルに表示する" ) ;
 
+// タイトルの見本プレートは色の区分・ひらがな・数値をランダムに選び、Tipsのプレートは白で固定する。
+assert( [ "white", "yellow", "green", "black" ].includes( elements.get( "title-plate" ).dataset.plateType ) ) ;
+assert.equal( elements.get( "title-hiragana" ).textContent.length, 1 ) ;
+assert.equal( elements.get( "title-number-digits" ).children.length, 3 ) ;
+assert.match( fs.readFileSync( require( "node:path" ).join( __dirname, "../Game/index.html" ), "utf8" ), /class="tips-plate" data-plate-type="white"/ ) ;
+
 // 入力処理から発行される効果音の種類を、実際の音声処理を維持したまま記録する。
 const effects = [] ;
 game.PlaySoundEffect = ( kind ) =>

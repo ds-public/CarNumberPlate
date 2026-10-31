@@ -61,6 +61,40 @@ class NumberPlateData
 		...Array.from( { length: 1000 }, ( _, index ) => String( index ).padStart( 3, "0" ) )
 	] ) ;
 
+	/// <summary>東北運輸局のかな文字一覧にある、登録自動車の全用途のひらがな。</summary>
+	static m_hiragana = "あいうえかきくけこさすせそたちつてとなにぬねのはひふほまみむめもやゆよらりるれろわを" ;
+
+	/// <summary>ナンバープレートの色の区分と出現率（％）。保有台数の割合に近い値とします。</summary>
+	static m_plateTypes = Object.freeze( [
+		{ name: "white", rate: 57 },
+		{ name: "yellow", rate: 40 },
+		{ name: "green", rate: 2.5 },
+		{ name: "black", rate: .5 }
+	] ) ;
+
+	/// <summary>ひらがなを等確率で1文字選びます。</summary>
+	/// <returns>ひらがな1文字。</returns>
+	static CreateRandomHiragana()
+	{
+		return this.m_hiragana[ Math.floor( Math.random() * this.m_hiragana.length ) ] ;
+	}
+
+	/// <summary>出現率に従ってナンバープレートの色の区分を選びます。</summary>
+	/// <returns>white・yellow・green・blackのいずれか。</returns>
+	static CreateRandomPlateType()
+	{
+		let threshold = Math.random() * 100 ;
+		for( const type of this.m_plateTypes )
+		{
+			threshold -= type.rate ;
+			if( threshold < 0 )
+			{
+				return type.name ;
+			}
+		}
+		return this.m_plateTypes[ 0 ].name ;
+	}
+
 	/// <summary>地域名と分類番号をそれぞれ等確率で選び、上段の表示を生成します。</summary>
 	/// <returns>地域名と分類番号を空白で区切った文字列。</returns>
 	static CreateRandomHeader()
