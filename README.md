@@ -7,7 +7,7 @@
 ナンバープレートに並ぶ数字を使って、答えを **10** にする計算パズルです。
 数字を並べ替えたり、演算記号を組み合わせたりして、制限時間内に解きましょう。
 
-Version 1.0.0 / Produced by DS-Works
+Version 1.0.1 / Produced by DS-Works
 
 ## はじめ方
 
