@@ -995,13 +995,10 @@ class NumberPlateGame
 			}
 		}
 		const solved = result.value !== null && result.value.m_numerator === 10n && result.value.m_denominator === 1n ;
-		for( const id of [ "plate-result-value", "tray-result-value" ] )
-		{
-			const element = document.getElementById( id ) ;
-			element.textContent = result.value === null ? "✕" : result.value.ToDisplayString() ;
-			element.className = result.value === null ? "invalid-result" : solved ? "solved-result" : "" ;
-			element.title = result.error ?? result.value.ToDisplayString() ;
-		}
+		const resultValue = document.getElementById( "plate-result-value" ) ;
+		resultValue.textContent = result.value === null ? "✕" : result.value.ToDisplayString() ;
+		resultValue.className = result.value === null ? "invalid-result" : solved ? "solved-result" : "" ;
+		resultValue.title = result.error ?? result.value.ToDisplayString() ;
 		const assembly = document.getElementById( "plate-assembly" ) ;
 		assembly.style.transform = `scale(${ Math.min( 1, 1160 / assembly.offsetWidth ) })` ;
 		if( allowAnswer && solved && this.m_phase === "play" && this.CheckTime() )

@@ -299,7 +299,6 @@ game.m_originalDigits = [ 5, 0, 4 ] ;
 game.ResetExpression() ;
 DragSymbol( "/", 1 ) ;
 assert.equal( elements.get( "plate-result-value" ).textContent, "9" ) ;
-assert.equal( elements.get( "tray-result-value" ).textContent, "9" ) ;
 assert.equal( document.querySelectorAll( ".invalid-division" ).length, 1 ) ;
 assert.equal( document.querySelectorAll( ".invalid-division" )[ 0 ].textContent, "÷" ) ;
 game.m_digits = [ 5, 4, 0 ] ;
