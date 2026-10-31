@@ -72,7 +72,7 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .tips-pointer { position: absolute; left: 264px; top: 222px; z-index: 3; width: 26px; height: 26px; border-radius: 50%; background: #244f3e55; border: 2px solid #fffdf2; animation: tips-pointer 3.6s ease-in-out infinite; }
 .tips-text { margin: 12px 0 0; font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #244f3e; }
 .tips-text strong { font-family: "Bahnschrift", sans-serif; font-size: 30px; color: #568746; margin: 0 2px; }
-.tips-subtext { margin: 6px 0 0; font-size: 17px; letter-spacing: 1px; color: #6c7c6d; }
+.tips-subtext { margin: 6px 0 0; font-size: 17px; font-weight: 700; letter-spacing: 1px; color: #6c7c6d; }
 .tips-start-button { margin-top: auto; padding: 12px 25px; }
 @keyframes tips-ghost {
 	0% { transform: translate(0, 0); opacity: 0; }
