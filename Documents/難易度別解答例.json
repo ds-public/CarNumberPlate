@@ -2425,7 +2425,7 @@
   },
   "1910": {
     "difficulty": 7,
-    "expression": "1+9*10"
+    "expression": "1+91*0"
   },
   "9011": {
     "difficulty": 7,
@@ -2437,7 +2437,7 @@
   },
   "9110": {
     "difficulty": 7,
-    "expression": "9+1*10"
+    "expression": "9+11*0"
   },
   "1024": {
     "difficulty": 11,
@@ -2557,7 +2557,7 @@
   },
   "2510": {
     "difficulty": 8,
-    "expression": "2*5*10"
+    "expression": "2*51*0"
   },
   "5012": {
     "difficulty": 10,
@@ -2581,7 +2581,7 @@
   },
   "5210": {
     "difficulty": 8,
-    "expression": "5*2*10"
+    "expression": "5*21*0"
   },
   "1026": {
     "difficulty": 12,
@@ -2773,7 +2773,7 @@
   },
   "2810": {
     "difficulty": 7,
-    "expression": "2+8*10"
+    "expression": "2+81*0"
   },
   "8012": {
     "difficulty": 7,
@@ -2797,11 +2797,11 @@
   },
   "8210": {
     "difficulty": 7,
-    "expression": "8+2*10"
+    "expression": "8+21*0"
   },
   "1029": {
     "difficulty": 7,
-    "expression": "10*2+9"
+    "expression": "10/2+9"
   },
   "1092": {
     "difficulty": 7,
@@ -2821,7 +2821,7 @@
   },
   "1920": {
     "difficulty": 7,
-    "expression": "-1+9+20"
+    "expression": "1+92*0"
   },
   "2019": {
     "difficulty": 6,
@@ -3097,7 +3097,7 @@
   },
   "3710": {
     "difficulty": 7,
-    "expression": "3+7*10"
+    "expression": "3+71*0"
   },
   "7013": {
     "difficulty": 7,
@@ -3121,7 +3121,7 @@
   },
   "7310": {
     "difficulty": 7,
-    "expression": "7+3*10"
+    "expression": "7+31*0"
   },
   "1038": {
     "difficulty": 7,
@@ -3197,11 +3197,11 @@
   },
   "1039": {
     "difficulty": 7,
-    "expression": "10*3+9"
+    "expression": "10/3+9"
   },
   "1093": {
     "difficulty": 9,
-    "expression": "10*3+9"
+    "expression": "10/3+9"
   },
   "1309": {
     "difficulty": 7,
@@ -3209,15 +3209,15 @@
   },
   "1390": {
     "difficulty": 9,
-    "expression": "1+3*09"
+    "expression": "0*39+1"
   },
   "1903": {
     "difficulty": 7,
     "expression": "1+90*3"
   },
   "1930": {
-    "difficulty": 8,
-    "expression": "1+9+3*0"
+    "difficulty": 7,
+    "expression": "1+93*0"
   },
   "3019": {
     "difficulty": 7,
@@ -3241,7 +3241,7 @@
   },
   "3910": {
     "difficulty": 9,
-    "expression": "3*01+9"
+    "expression": "1+93*0"
   },
   "9013": {
     "difficulty": 9,
@@ -3249,15 +3249,15 @@
   },
   "9031": {
     "difficulty": 7,
-    "expression": "90*3+1"
+    "expression": "90/3+1"
   },
   "9103": {
     "difficulty": 7,
     "expression": "9+10*3"
   },
   "9130": {
-    "difficulty": 8,
-    "expression": "9+1+3*0"
+    "difficulty": 7,
+    "expression": "9+13*0"
   },
   "9301": {
     "difficulty": 7,
@@ -3265,7 +3265,7 @@
   },
   "9310": {
     "difficulty": 9,
-    "expression": "9+3*01"
+    "expression": "0*31+9"
   },
   "1044": {
     "difficulty": 13,
@@ -3421,7 +3421,7 @@
   },
   "4610": {
     "difficulty": 7,
-    "expression": "4+6*10"
+    "expression": "4+61*0"
   },
   "6014": {
     "difficulty": 7,
@@ -3445,7 +3445,7 @@
   },
   "6410": {
     "difficulty": 7,
-    "expression": "6+4*10"
+    "expression": "6+41*0"
   },
   "1047": {
     "difficulty": 7,
@@ -3565,7 +3565,7 @@
   },
   "4810": {
     "difficulty": 11,
-    "expression": "√4+8*10"
+    "expression": "√4+81*0"
   },
   "8014": {
     "difficulty": 11,
@@ -3589,15 +3589,15 @@
   },
   "8410": {
     "difficulty": 11,
-    "expression": "8+√4*10"
+    "expression": "8+√41*0"
   },
   "1049": {
     "difficulty": 7,
-    "expression": "10*4+9"
+    "expression": "10/4+9"
   },
   "1094": {
     "difficulty": 9,
-    "expression": "10*4+9"
+    "expression": "10/4+9"
   },
   "1409": {
     "difficulty": 7,
@@ -3605,15 +3605,15 @@
   },
   "1490": {
     "difficulty": 9,
-    "expression": "1+4*09"
+    "expression": "0*49+1"
   },
   "1904": {
     "difficulty": 7,
     "expression": "1+90*4"
   },
   "1940": {
-    "difficulty": 8,
-    "expression": "1+9+4*0"
+    "difficulty": 7,
+    "expression": "1+94*0"
   },
   "4019": {
     "difficulty": 7,
@@ -3637,7 +3637,7 @@
   },
   "4910": {
     "difficulty": 9,
-    "expression": "4*01+9"
+    "expression": "1+94*0"
   },
   "9014": {
     "difficulty": 9,
@@ -3645,15 +3645,15 @@
   },
   "9041": {
     "difficulty": 7,
-    "expression": "90*4+1"
+    "expression": "90/4+1"
   },
   "9104": {
     "difficulty": 7,
     "expression": "9+10*4"
   },
   "9140": {
-    "difficulty": 8,
-    "expression": "9+1+4*0"
+    "difficulty": 7,
+    "expression": "9+14*0"
   },
   "9401": {
     "difficulty": 7,
@@ -3661,7 +3661,7 @@
   },
   "9410": {
     "difficulty": 9,
-    "expression": "9+4*01"
+    "expression": "0*41+9"
   },
   "1055": {
     "difficulty": 7,
@@ -3697,7 +3697,7 @@
   },
   "5510": {
     "difficulty": 7,
-    "expression": "5+5*10"
+    "expression": "5+51*0"
   },
   "1056": {
     "difficulty": 7,
@@ -3845,11 +3845,11 @@
   },
   "1059": {
     "difficulty": 7,
-    "expression": "10*5+9"
+    "expression": "10/5+9"
   },
   "1095": {
     "difficulty": 9,
-    "expression": "10*5+9"
+    "expression": "10/5+9"
   },
   "1509": {
     "difficulty": 7,
@@ -3857,15 +3857,15 @@
   },
   "1590": {
     "difficulty": 9,
-    "expression": "1+5*09"
+    "expression": "0*59+1"
   },
   "1905": {
     "difficulty": 7,
     "expression": "1+90*5"
   },
   "1950": {
-    "difficulty": 8,
-    "expression": "1+9+5*0"
+    "difficulty": 7,
+    "expression": "1+95*0"
   },
   "5019": {
     "difficulty": 7,
@@ -3889,7 +3889,7 @@
   },
   "5910": {
     "difficulty": 9,
-    "expression": "5*01+9"
+    "expression": "1+95*0"
   },
   "9015": {
     "difficulty": 9,
@@ -3897,15 +3897,15 @@
   },
   "9051": {
     "difficulty": 7,
-    "expression": "90*5+1"
+    "expression": "90/5+1"
   },
   "9105": {
     "difficulty": 7,
     "expression": "9+10*5"
   },
   "9150": {
-    "difficulty": 8,
-    "expression": "9+1+5*0"
+    "difficulty": 7,
+    "expression": "9+15*0"
   },
   "9501": {
     "difficulty": 7,
@@ -3913,15 +3913,15 @@
   },
   "9510": {
     "difficulty": 9,
-    "expression": "9+5*01"
+    "expression": "0*51+9"
   },
   "1069": {
     "difficulty": 7,
-    "expression": "10*6+9"
+    "expression": "10/6+9"
   },
   "1096": {
     "difficulty": 9,
-    "expression": "10*6+9"
+    "expression": "10/6+9"
   },
   "1609": {
     "difficulty": 7,
@@ -3929,15 +3929,15 @@
   },
   "1690": {
     "difficulty": 9,
-    "expression": "1+6*09"
+    "expression": "0*69+1"
   },
   "1906": {
     "difficulty": 7,
     "expression": "1+90*6"
   },
   "1960": {
-    "difficulty": 8,
-    "expression": "1+9+6*0"
+    "difficulty": 7,
+    "expression": "1+96*0"
   },
   "6019": {
     "difficulty": 7,
@@ -3961,7 +3961,7 @@
   },
   "6910": {
     "difficulty": 9,
-    "expression": "6*01+9"
+    "expression": "1+96*0"
   },
   "9016": {
     "difficulty": 9,
@@ -3969,15 +3969,15 @@
   },
   "9061": {
     "difficulty": 7,
-    "expression": "90*6+1"
+    "expression": "90/6+1"
   },
   "9106": {
     "difficulty": 7,
     "expression": "9+10*6"
   },
   "9160": {
-    "difficulty": 8,
-    "expression": "9+1+6*0"
+    "difficulty": 7,
+    "expression": "9+16*0"
   },
   "9601": {
     "difficulty": 7,
@@ -3985,7 +3985,7 @@
   },
   "9610": {
     "difficulty": 9,
-    "expression": "9+6*01"
+    "expression": "0*61+9"
   },
   "1078": {
     "difficulty": 14,
@@ -4061,11 +4061,11 @@
   },
   "1079": {
     "difficulty": 7,
-    "expression": "10*7+9"
+    "expression": "10/7+9"
   },
   "1097": {
     "difficulty": 9,
-    "expression": "10*7+9"
+    "expression": "10/7+9"
   },
   "1709": {
     "difficulty": 7,
@@ -4073,15 +4073,15 @@
   },
   "1790": {
     "difficulty": 9,
-    "expression": "1+7*09"
+    "expression": "0*79+1"
   },
   "1907": {
     "difficulty": 7,
     "expression": "1+90*7"
   },
   "1970": {
-    "difficulty": 8,
-    "expression": "1+9+7*0"
+    "difficulty": 7,
+    "expression": "1+97*0"
   },
   "7019": {
     "difficulty": 7,
@@ -4105,7 +4105,7 @@
   },
   "7910": {
     "difficulty": 9,
-    "expression": "7*01+9"
+    "expression": "1+97*0"
   },
   "9017": {
     "difficulty": 9,
@@ -4113,15 +4113,15 @@
   },
   "9071": {
     "difficulty": 7,
-    "expression": "90*7+1"
+    "expression": "90/7+1"
   },
   "9107": {
     "difficulty": 7,
     "expression": "9+10*7"
   },
   "9170": {
-    "difficulty": 8,
-    "expression": "9+1+7*0"
+    "difficulty": 7,
+    "expression": "9+17*0"
   },
   "9701": {
     "difficulty": 7,
@@ -4129,15 +4129,15 @@
   },
   "9710": {
     "difficulty": 9,
-    "expression": "9+7*01"
+    "expression": "0*71+9"
   },
   "1089": {
     "difficulty": 7,
-    "expression": "10*8+9"
+    "expression": "10/8+9"
   },
   "1098": {
     "difficulty": 9,
-    "expression": "10*8+9"
+    "expression": "10/8+9"
   },
   "1809": {
     "difficulty": 7,
@@ -4145,15 +4145,15 @@
   },
   "1890": {
     "difficulty": 9,
-    "expression": "1+8*09"
+    "expression": "0*89+1"
   },
   "1908": {
     "difficulty": 7,
     "expression": "1+90*8"
   },
   "1980": {
-    "difficulty": 8,
-    "expression": "1+9+8*0"
+    "difficulty": 7,
+    "expression": "1+98*0"
   },
   "8019": {
     "difficulty": 7,
@@ -4177,7 +4177,7 @@
   },
   "8910": {
     "difficulty": 9,
-    "expression": "8*01+9"
+    "expression": "1+98*0"
   },
   "9018": {
     "difficulty": 9,
@@ -4185,15 +4185,15 @@
   },
   "9081": {
     "difficulty": 7,
-    "expression": "90*8+1"
+    "expression": "90/8+1"
   },
   "9108": {
     "difficulty": 7,
     "expression": "9+10*8"
   },
   "9180": {
-    "difficulty": 8,
-    "expression": "9+1+8*0"
+    "difficulty": 7,
+    "expression": "9+18*0"
   },
   "9801": {
     "difficulty": 7,
@@ -4201,19 +4201,19 @@
   },
   "9810": {
     "difficulty": 9,
-    "expression": "9+8*01"
+    "expression": "0*81+9"
   },
   "1099": {
     "difficulty": 7,
-    "expression": "10*9+9"
+    "expression": "10/9+9"
   },
   "1909": {
     "difficulty": 7,
     "expression": "1+90*9"
   },
   "1990": {
-    "difficulty": 8,
-    "expression": "1+9+9*0"
+    "difficulty": 7,
+    "expression": "1+99*0"
   },
   "9019": {
     "difficulty": 7,
@@ -4221,15 +4221,15 @@
   },
   "9091": {
     "difficulty": 7,
-    "expression": "90*9+1"
+    "expression": "90/9+1"
   },
   "9109": {
     "difficulty": 7,
     "expression": "9+10*9"
   },
   "9190": {
-    "difficulty": 8,
-    "expression": "9+1+9*0"
+    "difficulty": 7,
+    "expression": "9+19*0"
   },
   "9901": {
     "difficulty": 7,
@@ -4237,7 +4237,7 @@
   },
   "9910": {
     "difficulty": 9,
-    "expression": "9*01+9"
+    "expression": "0*91+9"
   },
   "1114": {
     "difficulty": 12,
@@ -14041,19 +14041,19 @@
   },
   "2205": {
     "difficulty": 10,
-    "expression": "2*02*5"
+    "expression": "0*22*5"
   },
   "2250": {
     "difficulty": 10,
-    "expression": "2*05*2"
+    "expression": "0*25*2"
   },
   "2502": {
     "difficulty": 8,
     "expression": "2*50*2"
   },
   "2520": {
-    "difficulty": 9,
-    "expression": "2*5+2*0"
+    "difficulty": 8,
+    "expression": "2*52*0"
   },
   "5022": {
     "difficulty": 10,
@@ -14064,8 +14064,8 @@
     "expression": "5*20*2"
   },
   "5220": {
-    "difficulty": 9,
-    "expression": "5*2+2*0"
+    "difficulty": 8,
+    "expression": "5*22*0"
   },
   "2026": {
     "difficulty": 6,
@@ -14141,7 +14141,7 @@
   },
   "2028": {
     "difficulty": 7,
-    "expression": "20*2+8"
+    "expression": "20/2+8"
   },
   "2082": {
     "difficulty": 7,
@@ -14153,27 +14153,27 @@
   },
   "2280": {
     "difficulty": 9,
-    "expression": "2*08+2"
+    "expression": "0*28+2"
   },
   "2802": {
     "difficulty": 7,
     "expression": "2+80*2"
   },
   "2820": {
-    "difficulty": 8,
-    "expression": "2+8+2*0"
+    "difficulty": 7,
+    "expression": "2+82*0"
   },
   "8022": {
     "difficulty": 7,
-    "expression": "80*2+2"
+    "expression": "80/2+2"
   },
   "8202": {
     "difficulty": 7,
     "expression": "8+20*2"
   },
   "8220": {
-    "difficulty": 8,
-    "expression": "8+2+2*0"
+    "difficulty": 7,
+    "expression": "8+22*0"
   },
   "2029": {
     "difficulty": 9,
@@ -14381,7 +14381,7 @@
   },
   "3027": {
     "difficulty": 7,
-    "expression": "30*2+7"
+    "expression": "30/2+7"
   },
   "3072": {
     "difficulty": 9,
@@ -14393,19 +14393,19 @@
   },
   "3270": {
     "difficulty": 9,
-    "expression": "3+2*07"
+    "expression": "0*27+3"
   },
   "3702": {
     "difficulty": 7,
     "expression": "3+70*2"
   },
   "3720": {
-    "difficulty": 8,
-    "expression": "3+7+2*0"
+    "difficulty": 7,
+    "expression": "3+72*0"
   },
   "7023": {
     "difficulty": 7,
-    "expression": "70*2+3"
+    "expression": "70/2+3"
   },
   "7032": {
     "difficulty": 9,
@@ -14417,23 +14417,23 @@
   },
   "7230": {
     "difficulty": 9,
-    "expression": "7+2*03"
+    "expression": "0*23+7"
   },
   "7302": {
     "difficulty": 7,
     "expression": "7+30*2"
   },
   "7320": {
-    "difficulty": 8,
-    "expression": "7+3+2*0"
+    "difficulty": 7,
+    "expression": "7+32*0"
   },
   "2038": {
     "difficulty": 7,
-    "expression": "20*3+8"
+    "expression": "20/3+8"
   },
   "2083": {
     "difficulty": 9,
-    "expression": "20*3+8"
+    "expression": "20/3+8"
   },
   "2308": {
     "difficulty": 7,
@@ -14441,15 +14441,15 @@
   },
   "2380": {
     "difficulty": 9,
-    "expression": "2+3*08"
+    "expression": "0*38+2"
   },
   "2803": {
     "difficulty": 7,
     "expression": "2+80*3"
   },
   "2830": {
-    "difficulty": 8,
-    "expression": "2+8+3*0"
+    "difficulty": 7,
+    "expression": "2+83*0"
   },
   "3028": {
     "difficulty": 7,
@@ -14473,7 +14473,7 @@
   },
   "3820": {
     "difficulty": 9,
-    "expression": "3*02+8"
+    "expression": "2+83*0"
   },
   "8023": {
     "difficulty": 9,
@@ -14481,15 +14481,15 @@
   },
   "8032": {
     "difficulty": 7,
-    "expression": "80*3+2"
+    "expression": "80/3+2"
   },
   "8203": {
     "difficulty": 7,
     "expression": "8+20*3"
   },
   "8230": {
-    "difficulty": 8,
-    "expression": "8+2+3*0"
+    "difficulty": 7,
+    "expression": "8+23*0"
   },
   "8302": {
     "difficulty": 7,
@@ -14497,7 +14497,7 @@
   },
   "8320": {
     "difficulty": 9,
-    "expression": "8+3*02"
+    "expression": "0*32+8"
   },
   "2039": {
     "difficulty": 7,
@@ -14609,7 +14609,7 @@
   },
   "2045": {
     "difficulty": 10,
-    "expression": "(20-4)*-5"
+    "expression": "2*(0*45)"
   },
   "2054": {
     "difficulty": 10,
@@ -14628,8 +14628,8 @@
     "expression": "2*50*4"
   },
   "2540": {
-    "difficulty": 9,
-    "expression": "2*5+4*0"
+    "difficulty": 8,
+    "expression": "2*54*0"
   },
   "4025": {
     "difficulty": 8,
@@ -14669,7 +14669,7 @@
   },
   "5240": {
     "difficulty": 8,
-    "expression": "5/2*40"
+    "expression": "5*24*0"
   },
   "5402": {
     "difficulty": 9,
@@ -14705,7 +14705,7 @@
   },
   "4026": {
     "difficulty": 7,
-    "expression": "40*2+6"
+    "expression": "40/2+6"
   },
   "4062": {
     "difficulty": 9,
@@ -14717,19 +14717,19 @@
   },
   "4260": {
     "difficulty": 9,
-    "expression": "4+2*06"
+    "expression": "0*26+4"
   },
   "4602": {
     "difficulty": 7,
     "expression": "4+60*2"
   },
   "4620": {
-    "difficulty": 8,
-    "expression": "4+6+2*0"
+    "difficulty": 7,
+    "expression": "4+62*0"
   },
   "6024": {
     "difficulty": 7,
-    "expression": "60*2+4"
+    "expression": "60/2+4"
   },
   "6042": {
     "difficulty": 9,
@@ -14741,15 +14741,15 @@
   },
   "6240": {
     "difficulty": 9,
-    "expression": "6+2*04"
+    "expression": "0*24+6"
   },
   "6402": {
     "difficulty": 7,
     "expression": "6+40*2"
   },
   "6420": {
-    "difficulty": 8,
-    "expression": "6+4+2*0"
+    "difficulty": 7,
+    "expression": "6+42*0"
   },
   "2047": {
     "difficulty": 9,
@@ -14825,7 +14825,7 @@
   },
   "2048": {
     "difficulty": 7,
-    "expression": "20*4+8"
+    "expression": "20/4+8"
   },
   "2084": {
     "difficulty": 7,
@@ -14845,7 +14845,7 @@
   },
   "2840": {
     "difficulty": 7,
-    "expression": "-2+8+40"
+    "expression": "2+84*0"
   },
   "4028": {
     "difficulty": 6,
@@ -14976,12 +14976,12 @@
     "expression": "2*50*5"
   },
   "2550": {
-    "difficulty": 9,
-    "expression": "2*05+5"
+    "difficulty": 8,
+    "expression": "2*55*0"
   },
   "5025": {
     "difficulty": 7,
-    "expression": "50*2+5"
+    "expression": "50/2+5"
   },
   "5052": {
     "difficulty": 8,
@@ -14992,16 +14992,16 @@
     "expression": "5+2*05"
   },
   "5250": {
-    "difficulty": 9,
-    "expression": "5+2*05"
+    "difficulty": 8,
+    "expression": "5*25*0"
   },
   "5502": {
     "difficulty": 7,
     "expression": "5+50*2"
   },
   "5520": {
-    "difficulty": 8,
-    "expression": "5+5+2*0"
+    "difficulty": 7,
+    "expression": "5+52*0"
   },
   "2056": {
     "difficulty": 10,
@@ -15009,23 +15009,23 @@
   },
   "2065": {
     "difficulty": 10,
-    "expression": "(20*6)*5"
+    "expression": "2*(0*65)"
   },
   "2506": {
     "difficulty": 8,
     "expression": "2*50*6"
   },
   "2560": {
-    "difficulty": 9,
-    "expression": "2*5+6*0"
+    "difficulty": 8,
+    "expression": "2*56*0"
   },
   "2605": {
     "difficulty": 10,
-    "expression": "2*50*6"
+    "expression": "0*62*5"
   },
   "2650": {
-    "difficulty": 11,
-    "expression": "0*6+5*2"
+    "difficulty": 10,
+    "expression": "0*65*2"
   },
   "5026": {
     "difficulty": 10,
@@ -15033,23 +15033,23 @@
   },
   "5062": {
     "difficulty": 10,
-    "expression": "(50*6)*2"
+    "expression": "5*(0*62)"
   },
   "5206": {
     "difficulty": 8,
     "expression": "5*20*6"
   },
   "5260": {
-    "difficulty": 9,
-    "expression": "5*2+6*0"
+    "difficulty": 8,
+    "expression": "5*26*0"
   },
   "5602": {
     "difficulty": 10,
-    "expression": "5*20*6"
+    "expression": "0*65*2"
   },
   "5620": {
-    "difficulty": 11,
-    "expression": "0*6+2*5"
+    "difficulty": 10,
+    "expression": "0*62*5"
   },
   "6025": {
     "difficulty": 8,
@@ -15065,7 +15065,7 @@
   },
   "6250": {
     "difficulty": 10,
-    "expression": "6*05*2"
+    "expression": "5*26*0"
   },
   "6502": {
     "difficulty": 10,
@@ -15073,7 +15073,7 @@
   },
   "6520": {
     "difficulty": 10,
-    "expression": "6*02*5"
+    "expression": "2*56*0"
   },
   "2057": {
     "difficulty": 7,
@@ -15149,27 +15149,27 @@
   },
   "2058": {
     "difficulty": 7,
-    "expression": "20*5+8"
+    "expression": "20/5+8"
   },
   "2085": {
     "difficulty": 9,
-    "expression": "20*5+8"
+    "expression": "20/5+8"
   },
   "2508": {
     "difficulty": 7,
     "expression": "2+5*08"
   },
   "2580": {
-    "difficulty": 9,
-    "expression": "2+5*08"
+    "difficulty": 8,
+    "expression": "2*58*0"
   },
   "2805": {
     "difficulty": 7,
     "expression": "2+80*5"
   },
   "2850": {
-    "difficulty": 8,
-    "expression": "2+8+5*0"
+    "difficulty": 7,
+    "expression": "2+85*0"
   },
   "5028": {
     "difficulty": 7,
@@ -15184,8 +15184,8 @@
     "expression": "5*20*8"
   },
   "5280": {
-    "difficulty": 9,
-    "expression": "5*08+2"
+    "difficulty": 8,
+    "expression": "5*28*0"
   },
   "5802": {
     "difficulty": 9,
@@ -15193,7 +15193,7 @@
   },
   "5820": {
     "difficulty": 9,
-    "expression": "5*02+8"
+    "expression": "2+85*0"
   },
   "8025": {
     "difficulty": 8,
@@ -15201,15 +15201,15 @@
   },
   "8052": {
     "difficulty": 7,
-    "expression": "80*5+2"
+    "expression": "80/5+2"
   },
   "8205": {
     "difficulty": 7,
     "expression": "8+20*5"
   },
   "8250": {
-    "difficulty": 8,
-    "expression": "8+2+5*0"
+    "difficulty": 7,
+    "expression": "8+25*0"
   },
   "8502": {
     "difficulty": 7,
@@ -15217,7 +15217,7 @@
   },
   "8520": {
     "difficulty": 9,
-    "expression": "8+5*02"
+    "expression": "0*52+8"
   },
   "2059": {
     "difficulty": 10,
@@ -15232,16 +15232,16 @@
     "expression": "2*50*9"
   },
   "2590": {
-    "difficulty": 9,
-    "expression": "2*5+9*0"
+    "difficulty": 8,
+    "expression": "2*59*0"
   },
   "2905": {
     "difficulty": 10,
-    "expression": "2*50*9"
+    "expression": "0*92*5"
   },
   "2950": {
     "difficulty": 10,
-    "expression": "2+√9+50"
+    "expression": "0*95*2"
   },
   "5029": {
     "difficulty": 10,
@@ -15256,16 +15256,16 @@
     "expression": "5*20*9"
   },
   "5290": {
-    "difficulty": 9,
-    "expression": "5*2+9*0"
+    "difficulty": 8,
+    "expression": "5*29*0"
   },
   "5902": {
     "difficulty": 10,
-    "expression": "5*20*9"
+    "expression": "0*95*2"
   },
   "5920": {
     "difficulty": 10,
-    "expression": "5+√9+20"
+    "expression": "0*92*5"
   },
   "9025": {
     "difficulty": 8,
@@ -15281,7 +15281,7 @@
   },
   "9250": {
     "difficulty": 10,
-    "expression": "9*05*2"
+    "expression": "5*29*0"
   },
   "9502": {
     "difficulty": 10,
@@ -15289,7 +15289,7 @@
   },
   "9520": {
     "difficulty": 10,
-    "expression": "9*02*5"
+    "expression": "2*59*0"
   },
   "2066": {
     "difficulty": 7,
@@ -15401,7 +15401,7 @@
   },
   "2068": {
     "difficulty": 7,
-    "expression": "20*6+8"
+    "expression": "20/6+8"
   },
   "2086": {
     "difficulty": 9,
@@ -15421,7 +15421,7 @@
   },
   "2860": {
     "difficulty": 7,
-    "expression": "2*8-60"
+    "expression": "2+86*0"
   },
   "6028": {
     "difficulty": 7,
@@ -15453,7 +15453,7 @@
   },
   "8062": {
     "difficulty": 7,
-    "expression": "80*6+2"
+    "expression": "80/6+2"
   },
   "8206": {
     "difficulty": 7,
@@ -15461,7 +15461,7 @@
   },
   "8260": {
     "difficulty": 7,
-    "expression": "8/2+60"
+    "expression": "8+26*0"
   },
   "8602": {
     "difficulty": 7,
@@ -15469,7 +15469,7 @@
   },
   "8620": {
     "difficulty": 9,
-    "expression": "6+8/20"
+    "expression": "0*62+8"
   },
   "2077": {
     "difficulty": 12,
@@ -15509,11 +15509,11 @@
   },
   "2078": {
     "difficulty": 7,
-    "expression": "20*7+8"
+    "expression": "20/7+8"
   },
   "2087": {
     "difficulty": 9,
-    "expression": "20*7+8"
+    "expression": "20/7+8"
   },
   "2708": {
     "difficulty": 7,
@@ -15521,15 +15521,15 @@
   },
   "2780": {
     "difficulty": 9,
-    "expression": "2+7*08"
+    "expression": "0*78+2"
   },
   "2807": {
     "difficulty": 7,
     "expression": "2+80*7"
   },
   "2870": {
-    "difficulty": 8,
-    "expression": "2+8+7*0"
+    "difficulty": 7,
+    "expression": "2+87*0"
   },
   "7028": {
     "difficulty": 7,
@@ -15553,7 +15553,7 @@
   },
   "7820": {
     "difficulty": 9,
-    "expression": "7*02+8"
+    "expression": "2+87*0"
   },
   "8027": {
     "difficulty": 9,
@@ -15561,15 +15561,15 @@
   },
   "8072": {
     "difficulty": 7,
-    "expression": "80*7+2"
+    "expression": "80/7+2"
   },
   "8207": {
     "difficulty": 7,
     "expression": "8+20*7"
   },
   "8270": {
-    "difficulty": 8,
-    "expression": "8+2+7*0"
+    "difficulty": 7,
+    "expression": "8+27*0"
   },
   "8702": {
     "difficulty": 7,
@@ -15577,7 +15577,7 @@
   },
   "8720": {
     "difficulty": 9,
-    "expression": "8+7*02"
+    "expression": "0*72+8"
   },
   "2079": {
     "difficulty": 11,
@@ -15605,7 +15605,7 @@
   },
   "7029": {
     "difficulty": 11,
-    "expression": "70*2+√9"
+    "expression": "70/2+√9"
   },
   "7092": {
     "difficulty": 13,
@@ -15617,19 +15617,19 @@
   },
   "7290": {
     "difficulty": 13,
-    "expression": "7+2*0√9"
+    "expression": "0*2√9+7"
   },
   "7902": {
     "difficulty": 11,
     "expression": "7+√90*2"
   },
   "7920": {
-    "difficulty": 12,
-    "expression": "7+√9+2*0"
+    "difficulty": 11,
+    "expression": "7+√92*0"
   },
   "9027": {
     "difficulty": 11,
-    "expression": "√90*2+7"
+    "expression": "√90/2+7"
   },
   "9072": {
     "difficulty": 13,
@@ -15641,27 +15641,27 @@
   },
   "9270": {
     "difficulty": 13,
-    "expression": "√9+2*07"
+    "expression": "0*27+√9"
   },
   "9702": {
     "difficulty": 11,
     "expression": "√9+70*2"
   },
   "9720": {
-    "difficulty": 12,
-    "expression": "√9+7+2*0"
+    "difficulty": 11,
+    "expression": "√9+72*0"
   },
   "2088": {
     "difficulty": 7,
-    "expression": "20*8+8"
+    "expression": "20/8+8"
   },
   "2808": {
     "difficulty": 7,
     "expression": "2+80*8"
   },
   "2880": {
-    "difficulty": 8,
-    "expression": "2+8+8*0"
+    "difficulty": 7,
+    "expression": "2+88*0"
   },
   "8028": {
     "difficulty": 7,
@@ -15669,15 +15669,15 @@
   },
   "8082": {
     "difficulty": 7,
-    "expression": "80*8+2"
+    "expression": "80/8+2"
   },
   "8208": {
     "difficulty": 7,
     "expression": "8+20*8"
   },
   "8280": {
-    "difficulty": 8,
-    "expression": "8+2+8*0"
+    "difficulty": 7,
+    "expression": "8+28*0"
   },
   "8802": {
     "difficulty": 7,
@@ -15685,23 +15685,23 @@
   },
   "8820": {
     "difficulty": 9,
-    "expression": "8*02+8"
+    "expression": "0*82+8"
   },
   "2089": {
     "difficulty": 9,
-    "expression": "20*9+8"
+    "expression": "20/9+8"
   },
   "2098": {
     "difficulty": 7,
-    "expression": "20*9+8"
+    "expression": "20/9+8"
   },
   "2809": {
     "difficulty": 7,
     "expression": "2+80*9"
   },
   "2890": {
-    "difficulty": 8,
-    "expression": "2+8+9*0"
+    "difficulty": 7,
+    "expression": "2+89*0"
   },
   "2908": {
     "difficulty": 7,
@@ -15717,15 +15717,15 @@
   },
   "8092": {
     "difficulty": 7,
-    "expression": "80*9+2"
+    "expression": "80/9+2"
   },
   "8209": {
     "difficulty": 7,
     "expression": "8+20*9"
   },
   "8290": {
-    "difficulty": 8,
-    "expression": "8+2+9*0"
+    "difficulty": 7,
+    "expression": "8+29*0"
   },
   "8902": {
     "difficulty": 7,
@@ -15757,7 +15757,7 @@
   },
   "9820": {
     "difficulty": 9,
-    "expression": "9*02+8"
+    "expression": "2+89*0"
   },
   "2099": {
     "difficulty": 11,
@@ -22637,7 +22637,7 @@
   },
   "3037": {
     "difficulty": 7,
-    "expression": "30*3+7"
+    "expression": "30/3+7"
   },
   "3073": {
     "difficulty": 7,
@@ -22649,27 +22649,27 @@
   },
   "3370": {
     "difficulty": 9,
-    "expression": "3*07+3"
+    "expression": "0*37+3"
   },
   "3703": {
     "difficulty": 7,
     "expression": "3+70*3"
   },
   "3730": {
-    "difficulty": 8,
-    "expression": "3+7+3*0"
+    "difficulty": 7,
+    "expression": "3+73*0"
   },
   "7033": {
     "difficulty": 7,
-    "expression": "70*3+3"
+    "expression": "70/3+3"
   },
   "7303": {
     "difficulty": 7,
     "expression": "7+30*3"
   },
   "7330": {
-    "difficulty": 8,
-    "expression": "7+3+3*0"
+    "difficulty": 7,
+    "expression": "7+33*0"
   },
   "3039": {
     "difficulty": 9,
@@ -22841,7 +22841,7 @@
   },
   "4036": {
     "difficulty": 7,
-    "expression": "40*3+6"
+    "expression": "40/3+6"
   },
   "4063": {
     "difficulty": 9,
@@ -22853,19 +22853,19 @@
   },
   "4360": {
     "difficulty": 9,
-    "expression": "4+3*06"
+    "expression": "0*36+4"
   },
   "4603": {
     "difficulty": 7,
     "expression": "4+60*3"
   },
   "4630": {
-    "difficulty": 8,
-    "expression": "4+6+3*0"
+    "difficulty": 7,
+    "expression": "4+63*0"
   },
   "6034": {
     "difficulty": 7,
-    "expression": "60*3+4"
+    "expression": "60/3+4"
   },
   "6043": {
     "difficulty": 9,
@@ -22877,23 +22877,23 @@
   },
   "6340": {
     "difficulty": 9,
-    "expression": "6+3*04"
+    "expression": "0*34+6"
   },
   "6403": {
     "difficulty": 7,
     "expression": "6+40*3"
   },
   "6430": {
-    "difficulty": 8,
-    "expression": "6+4+3*0"
+    "difficulty": 7,
+    "expression": "6+43*0"
   },
   "3047": {
     "difficulty": 7,
-    "expression": "30*4+7"
+    "expression": "30/4+7"
   },
   "3074": {
     "difficulty": 9,
-    "expression": "30*4+7"
+    "expression": "30/4+7"
   },
   "3407": {
     "difficulty": 7,
@@ -22901,15 +22901,15 @@
   },
   "3470": {
     "difficulty": 9,
-    "expression": "3+4*07"
+    "expression": "0*47+3"
   },
   "3704": {
     "difficulty": 7,
     "expression": "3+70*4"
   },
   "3740": {
-    "difficulty": 8,
-    "expression": "3+7+4*0"
+    "difficulty": 7,
+    "expression": "3+74*0"
   },
   "4037": {
     "difficulty": 7,
@@ -22933,7 +22933,7 @@
   },
   "4730": {
     "difficulty": 9,
-    "expression": "4*03+7"
+    "expression": "3+74*0"
   },
   "7034": {
     "difficulty": 9,
@@ -22941,15 +22941,15 @@
   },
   "7043": {
     "difficulty": 7,
-    "expression": "70*4+3"
+    "expression": "70/4+3"
   },
   "7304": {
     "difficulty": 7,
     "expression": "7+30*4"
   },
   "7340": {
-    "difficulty": 8,
-    "expression": "7+3+4*0"
+    "difficulty": 7,
+    "expression": "7+34*0"
   },
   "7403": {
     "difficulty": 7,
@@ -22957,7 +22957,7 @@
   },
   "7430": {
     "difficulty": 9,
-    "expression": "7+4*03"
+    "expression": "0*43+7"
   },
   "3048": {
     "difficulty": 11,
@@ -22985,7 +22985,7 @@
   },
   "4038": {
     "difficulty": 11,
-    "expression": "√40*3+8"
+    "expression": "√40/3+8"
   },
   "4083": {
     "difficulty": 13,
@@ -22997,19 +22997,19 @@
   },
   "4380": {
     "difficulty": 13,
-    "expression": "√4+3*08"
+    "expression": "0*38+√4"
   },
   "4803": {
     "difficulty": 11,
     "expression": "√4+80*3"
   },
   "4830": {
-    "difficulty": 12,
-    "expression": "√4+8+3*0"
+    "difficulty": 11,
+    "expression": "√4+83*0"
   },
   "8034": {
     "difficulty": 11,
-    "expression": "80*3+√4"
+    "expression": "80/3+√4"
   },
   "8043": {
     "difficulty": 13,
@@ -23021,15 +23021,15 @@
   },
   "8340": {
     "difficulty": 13,
-    "expression": "8+3*0√4"
+    "expression": "0*3√4+8"
   },
   "8403": {
     "difficulty": 11,
     "expression": "8+√40*3"
   },
   "8430": {
-    "difficulty": 12,
-    "expression": "8+√4+3*0"
+    "difficulty": 11,
+    "expression": "8+√43*0"
   },
   "3049": {
     "difficulty": 7,
@@ -23117,7 +23117,7 @@
   },
   "5035": {
     "difficulty": 7,
-    "expression": "50*3+5"
+    "expression": "50/3+5"
   },
   "5053": {
     "difficulty": 8,
@@ -23136,8 +23136,8 @@
     "expression": "5+50*3"
   },
   "5530": {
-    "difficulty": 8,
-    "expression": "5+5+3*0"
+    "difficulty": 7,
+    "expression": "5+53*0"
   },
   "3056": {
     "difficulty": 11,
@@ -23213,11 +23213,11 @@
   },
   "3057": {
     "difficulty": 7,
-    "expression": "30*5+7"
+    "expression": "30/5+7"
   },
   "3075": {
     "difficulty": 9,
-    "expression": "30*5+7"
+    "expression": "30/5+7"
   },
   "3507": {
     "difficulty": 7,
@@ -23225,15 +23225,15 @@
   },
   "3570": {
     "difficulty": 9,
-    "expression": "3+5*07"
+    "expression": "0*57+3"
   },
   "3705": {
     "difficulty": 7,
     "expression": "3+70*5"
   },
   "3750": {
-    "difficulty": 8,
-    "expression": "3+7+5*0"
+    "difficulty": 7,
+    "expression": "3+75*0"
   },
   "5037": {
     "difficulty": 7,
@@ -23257,7 +23257,7 @@
   },
   "5730": {
     "difficulty": 9,
-    "expression": "5*03+7"
+    "expression": "3+75*0"
   },
   "7035": {
     "difficulty": 9,
@@ -23265,15 +23265,15 @@
   },
   "7053": {
     "difficulty": 7,
-    "expression": "70*5+3"
+    "expression": "70/5+3"
   },
   "7305": {
     "difficulty": 7,
     "expression": "7+30*5"
   },
   "7350": {
-    "difficulty": 8,
-    "expression": "7+3+5*0"
+    "difficulty": 7,
+    "expression": "7+35*0"
   },
   "7503": {
     "difficulty": 7,
@@ -23281,7 +23281,7 @@
   },
   "7530": {
     "difficulty": 9,
-    "expression": "7+5*03"
+    "expression": "0*53+7"
   },
   "3058": {
     "difficulty": 7,
@@ -23357,7 +23357,7 @@
   },
   "3067": {
     "difficulty": 7,
-    "expression": "30*6+7"
+    "expression": "30/6+7"
   },
   "3076": {
     "difficulty": 7,
@@ -23377,7 +23377,7 @@
   },
   "3760": {
     "difficulty": 7,
-    "expression": "-3+7+60"
+    "expression": "3+76*0"
   },
   "6037": {
     "difficulty": 6,
@@ -23501,15 +23501,15 @@
   },
   "3077": {
     "difficulty": 7,
-    "expression": "30*7+7"
+    "expression": "30/7+7"
   },
   "3707": {
     "difficulty": 7,
     "expression": "3+70*7"
   },
   "3770": {
-    "difficulty": 8,
-    "expression": "3+7+7*0"
+    "difficulty": 7,
+    "expression": "3+77*0"
   },
   "7037": {
     "difficulty": 7,
@@ -23517,15 +23517,15 @@
   },
   "7073": {
     "difficulty": 7,
-    "expression": "70*7+3"
+    "expression": "70/7+3"
   },
   "7307": {
     "difficulty": 7,
     "expression": "7+30*7"
   },
   "7370": {
-    "difficulty": 8,
-    "expression": "7+3+7*0"
+    "difficulty": 7,
+    "expression": "7+37*0"
   },
   "7703": {
     "difficulty": 7,
@@ -23533,23 +23533,23 @@
   },
   "7730": {
     "difficulty": 9,
-    "expression": "7*03+7"
+    "expression": "0*73+7"
   },
   "3078": {
     "difficulty": 9,
-    "expression": "30*8+7"
+    "expression": "30/8+7"
   },
   "3087": {
     "difficulty": 7,
-    "expression": "30*8+7"
+    "expression": "30/8+7"
   },
   "3708": {
     "difficulty": 7,
     "expression": "3+70*8"
   },
   "3780": {
-    "difficulty": 8,
-    "expression": "3+7+8*0"
+    "difficulty": 7,
+    "expression": "3+78*0"
   },
   "3807": {
     "difficulty": 7,
@@ -23557,23 +23557,23 @@
   },
   "3870": {
     "difficulty": 9,
-    "expression": "3+8*07"
+    "expression": "0*87+3"
   },
   "7038": {
     "difficulty": 9,
-    "expression": "70*8+3"
+    "expression": "70/8+3"
   },
   "7083": {
     "difficulty": 7,
-    "expression": "70*8+3"
+    "expression": "70/8+3"
   },
   "7308": {
     "difficulty": 7,
     "expression": "7+30*8"
   },
   "7380": {
-    "difficulty": 8,
-    "expression": "7+3+8*0"
+    "difficulty": 7,
+    "expression": "7+38*0"
   },
   "7803": {
     "difficulty": 7,
@@ -23581,7 +23581,7 @@
   },
   "7830": {
     "difficulty": 9,
-    "expression": "7+8*03"
+    "expression": "0*83+7"
   },
   "8037": {
     "difficulty": 7,
@@ -23597,7 +23597,7 @@
   },
   "8370": {
     "difficulty": 9,
-    "expression": "8*07+3"
+    "expression": "7+38*0"
   },
   "8703": {
     "difficulty": 9,
@@ -23605,23 +23605,23 @@
   },
   "8730": {
     "difficulty": 9,
-    "expression": "8*03+7"
+    "expression": "3+78*0"
   },
   "3079": {
     "difficulty": 9,
-    "expression": "30*9+7"
+    "expression": "30/9+7"
   },
   "3097": {
     "difficulty": 7,
-    "expression": "30*9+7"
+    "expression": "30/9+7"
   },
   "3709": {
     "difficulty": 7,
     "expression": "3+70*9"
   },
   "3790": {
-    "difficulty": 8,
-    "expression": "3+7+9*0"
+    "difficulty": 7,
+    "expression": "3+79*0"
   },
   "3907": {
     "difficulty": 7,
@@ -23629,7 +23629,7 @@
   },
   "3970": {
     "difficulty": 9,
-    "expression": "3+9*07"
+    "expression": "0*97+3"
   },
   "7039": {
     "difficulty": 9,
@@ -23644,8 +23644,8 @@
     "expression": "7+30*9"
   },
   "7390": {
-    "difficulty": 8,
-    "expression": "7+3+9*0"
+    "difficulty": 7,
+    "expression": "7+39*0"
   },
   "7903": {
     "difficulty": 7,
@@ -23677,7 +23677,7 @@
   },
   "9730": {
     "difficulty": 9,
-    "expression": "7+9/30"
+    "expression": "3+79*0"
   },
   "3099": {
     "difficulty": 13,
@@ -28241,7 +28241,7 @@
   },
   "4540": {
     "difficulty": 12,
-    "expression": "4*5/√40"
+    "expression": "√4*54*0"
   },
   "5044": {
     "difficulty": 13,
@@ -28253,11 +28253,11 @@
   },
   "5440": {
     "difficulty": 12,
-    "expression": "5*4/√40"
+    "expression": "5*√44*0"
   },
   "4046": {
     "difficulty": 7,
-    "expression": "40*4+6"
+    "expression": "40/4+6"
   },
   "4064": {
     "difficulty": 7,
@@ -28276,20 +28276,20 @@
     "expression": "4+60*4"
   },
   "4640": {
-    "difficulty": 8,
-    "expression": "4+6+4*0"
+    "difficulty": 7,
+    "expression": "4+64*0"
   },
   "6044": {
     "difficulty": 7,
-    "expression": "60*4+4"
+    "expression": "60/4+4"
   },
   "6404": {
     "difficulty": 7,
     "expression": "6+40*4"
   },
   "6440": {
-    "difficulty": 8,
-    "expression": "6+4+4*0"
+    "difficulty": 7,
+    "expression": "6+44*0"
   },
   "4047": {
     "difficulty": 12,
@@ -28413,7 +28413,7 @@
   },
   "5045": {
     "difficulty": 7,
-    "expression": "50*4+5"
+    "expression": "50/4+5"
   },
   "5054": {
     "difficulty": 9,
@@ -28425,23 +28425,23 @@
   },
   "5450": {
     "difficulty": 9,
-    "expression": "5+4*05"
+    "expression": "0*45+5"
   },
   "5504": {
     "difficulty": 7,
     "expression": "5+50*4"
   },
   "5540": {
-    "difficulty": 8,
-    "expression": "5+5+4*0"
+    "difficulty": 7,
+    "expression": "5+54*0"
   },
   "4056": {
     "difficulty": 7,
-    "expression": "40*5+6"
+    "expression": "40/5+6"
   },
   "4065": {
     "difficulty": 9,
-    "expression": "40*5+6"
+    "expression": "40/5+6"
   },
   "4506": {
     "difficulty": 7,
@@ -28449,15 +28449,15 @@
   },
   "4560": {
     "difficulty": 9,
-    "expression": "4+5*06"
+    "expression": "0*56+4"
   },
   "4605": {
     "difficulty": 7,
     "expression": "4+60*5"
   },
   "4650": {
-    "difficulty": 8,
-    "expression": "4+6+5*0"
+    "difficulty": 7,
+    "expression": "4+65*0"
   },
   "5046": {
     "difficulty": 7,
@@ -28481,7 +28481,7 @@
   },
   "5640": {
     "difficulty": 9,
-    "expression": "5*04+6"
+    "expression": "4+65*0"
   },
   "6045": {
     "difficulty": 9,
@@ -28489,15 +28489,15 @@
   },
   "6054": {
     "difficulty": 7,
-    "expression": "60*5+4"
+    "expression": "60/5+4"
   },
   "6405": {
     "difficulty": 7,
     "expression": "6+40*5"
   },
   "6450": {
-    "difficulty": 8,
-    "expression": "6+4+5*0"
+    "difficulty": 7,
+    "expression": "6+45*0"
   },
   "6504": {
     "difficulty": 7,
@@ -28505,7 +28505,7 @@
   },
   "6540": {
     "difficulty": 9,
-    "expression": "6+5*04"
+    "expression": "0*54+6"
   },
   "4057": {
     "difficulty": 11,
@@ -28725,15 +28725,15 @@
   },
   "4066": {
     "difficulty": 7,
-    "expression": "40*6+6"
+    "expression": "40/6+6"
   },
   "4606": {
     "difficulty": 7,
     "expression": "4+60*6"
   },
   "4660": {
-    "difficulty": 8,
-    "expression": "4+6+6*0"
+    "difficulty": 7,
+    "expression": "4+66*0"
   },
   "6046": {
     "difficulty": 7,
@@ -28741,15 +28741,15 @@
   },
   "6064": {
     "difficulty": 7,
-    "expression": "60*6+4"
+    "expression": "60/6+4"
   },
   "6406": {
     "difficulty": 7,
     "expression": "6+40*6"
   },
   "6460": {
-    "difficulty": 8,
-    "expression": "6+4+6*0"
+    "difficulty": 7,
+    "expression": "6+46*0"
   },
   "6604": {
     "difficulty": 7,
@@ -28757,23 +28757,23 @@
   },
   "6640": {
     "difficulty": 9,
-    "expression": "6*04+6"
+    "expression": "0*64+6"
   },
   "4067": {
     "difficulty": 9,
-    "expression": "40*7+6"
+    "expression": "40/7+6"
   },
   "4076": {
     "difficulty": 7,
-    "expression": "40*7+6"
+    "expression": "40/7+6"
   },
   "4607": {
     "difficulty": 7,
     "expression": "4+60*7"
   },
   "4670": {
-    "difficulty": 8,
-    "expression": "4+6+7*0"
+    "difficulty": 7,
+    "expression": "4+67*0"
   },
   "4706": {
     "difficulty": 7,
@@ -28781,23 +28781,23 @@
   },
   "4760": {
     "difficulty": 9,
-    "expression": "4+7*06"
+    "expression": "0*76+4"
   },
   "6047": {
     "difficulty": 9,
-    "expression": "60*7+4"
+    "expression": "60/7+4"
   },
   "6074": {
     "difficulty": 7,
-    "expression": "60*7+4"
+    "expression": "60/7+4"
   },
   "6407": {
     "difficulty": 7,
     "expression": "6+40*7"
   },
   "6470": {
-    "difficulty": 8,
-    "expression": "6+4+7*0"
+    "difficulty": 7,
+    "expression": "6+47*0"
   },
   "6704": {
     "difficulty": 7,
@@ -28805,7 +28805,7 @@
   },
   "6740": {
     "difficulty": 9,
-    "expression": "6+7*04"
+    "expression": "0*74+6"
   },
   "7046": {
     "difficulty": 7,
@@ -28821,7 +28821,7 @@
   },
   "7460": {
     "difficulty": 9,
-    "expression": "7*06+4"
+    "expression": "6+47*0"
   },
   "7604": {
     "difficulty": 9,
@@ -28829,7 +28829,7 @@
   },
   "7640": {
     "difficulty": 9,
-    "expression": "7*04+6"
+    "expression": "4+67*0"
   },
   "4068": {
     "difficulty": 7,
@@ -28837,7 +28837,7 @@
   },
   "4086": {
     "difficulty": 7,
-    "expression": "40*8+6"
+    "expression": "40/8+6"
   },
   "4608": {
     "difficulty": 7,
@@ -28845,7 +28845,7 @@
   },
   "4680": {
     "difficulty": 7,
-    "expression": "-4+6+80"
+    "expression": "4+68*0"
   },
   "4806": {
     "difficulty": 7,
@@ -28905,19 +28905,19 @@
   },
   "4069": {
     "difficulty": 9,
-    "expression": "40*9+6"
+    "expression": "40/9+6"
   },
   "4096": {
     "difficulty": 7,
-    "expression": "40*9+6"
+    "expression": "40/9+6"
   },
   "4609": {
     "difficulty": 7,
     "expression": "4+60*9"
   },
   "4690": {
-    "difficulty": 8,
-    "expression": "4+6+9*0"
+    "difficulty": 7,
+    "expression": "4+69*0"
   },
   "4906": {
     "difficulty": 7,
@@ -28925,23 +28925,23 @@
   },
   "4960": {
     "difficulty": 9,
-    "expression": "4+9*06"
+    "expression": "0*96+4"
   },
   "6049": {
     "difficulty": 9,
-    "expression": "60*9+4"
+    "expression": "60/9+4"
   },
   "6094": {
     "difficulty": 7,
-    "expression": "60*9+4"
+    "expression": "60/9+4"
   },
   "6409": {
     "difficulty": 7,
     "expression": "6+40*9"
   },
   "6490": {
-    "difficulty": 8,
-    "expression": "6+4+9*0"
+    "difficulty": 7,
+    "expression": "6+49*0"
   },
   "6904": {
     "difficulty": 7,
@@ -28949,7 +28949,7 @@
   },
   "6940": {
     "difficulty": 9,
-    "expression": "6+9*04"
+    "expression": "0*94+6"
   },
   "9046": {
     "difficulty": 7,
@@ -28965,7 +28965,7 @@
   },
   "9460": {
     "difficulty": 9,
-    "expression": "9*06+4"
+    "expression": "6+49*0"
   },
   "9604": {
     "difficulty": 9,
@@ -28973,7 +28973,7 @@
   },
   "9640": {
     "difficulty": 9,
-    "expression": "9*04+6"
+    "expression": "4+69*0"
   },
   "4077": {
     "difficulty": 7,
@@ -29013,11 +29013,11 @@
   },
   "4078": {
     "difficulty": 11,
-    "expression": "√40*7+8"
+    "expression": "√40/7+8"
   },
   "4087": {
     "difficulty": 13,
-    "expression": "√40*7+8"
+    "expression": "√40/7+8"
   },
   "4708": {
     "difficulty": 11,
@@ -29025,15 +29025,15 @@
   },
   "4780": {
     "difficulty": 13,
-    "expression": "√4+7*08"
+    "expression": "0*78+√4"
   },
   "4807": {
     "difficulty": 11,
     "expression": "√4+80*7"
   },
   "4870": {
-    "difficulty": 12,
-    "expression": "√4+8+7*0"
+    "difficulty": 11,
+    "expression": "√4+87*0"
   },
   "7048": {
     "difficulty": 11,
@@ -29057,7 +29057,7 @@
   },
   "7840": {
     "difficulty": 13,
-    "expression": "7*0√4+8"
+    "expression": "√4+87*0"
   },
   "8047": {
     "difficulty": 13,
@@ -29065,15 +29065,15 @@
   },
   "8074": {
     "difficulty": 11,
-    "expression": "80*7+√4"
+    "expression": "80/7+√4"
   },
   "8407": {
     "difficulty": 11,
     "expression": "8+√40*7"
   },
   "8470": {
-    "difficulty": 12,
-    "expression": "8+√4+7*0"
+    "difficulty": 11,
+    "expression": "8+√47*0"
   },
   "8704": {
     "difficulty": 11,
@@ -29081,7 +29081,7 @@
   },
   "8740": {
     "difficulty": 13,
-    "expression": "8+7*0√4"
+    "expression": "0*7√4+8"
   },
   "4079": {
     "difficulty": 11,
@@ -29109,7 +29109,7 @@
   },
   "7049": {
     "difficulty": 11,
-    "expression": "70*4+√9"
+    "expression": "70/4+√9"
   },
   "7094": {
     "difficulty": 13,
@@ -29121,19 +29121,19 @@
   },
   "7490": {
     "difficulty": 13,
-    "expression": "7+4*0√9"
+    "expression": "0*4√9+7"
   },
   "7904": {
     "difficulty": 11,
     "expression": "7+√90*4"
   },
   "7940": {
-    "difficulty": 12,
-    "expression": "7+√9+4*0"
+    "difficulty": 11,
+    "expression": "7+√94*0"
   },
   "9047": {
     "difficulty": 11,
-    "expression": "√90*4+7"
+    "expression": "√90/4+7"
   },
   "9074": {
     "difficulty": 13,
@@ -29145,15 +29145,15 @@
   },
   "9470": {
     "difficulty": 13,
-    "expression": "√9+4*07"
+    "expression": "0*47+√9"
   },
   "9704": {
     "difficulty": 11,
     "expression": "√9+70*4"
   },
   "9740": {
-    "difficulty": 12,
-    "expression": "√9+7+4*0"
+    "difficulty": 11,
+    "expression": "√9+74*0"
   },
   "4088": {
     "difficulty": 9,
@@ -29193,19 +29193,19 @@
   },
   "4089": {
     "difficulty": 13,
-    "expression": "√40*9+8"
+    "expression": "√40/9+8"
   },
   "4098": {
     "difficulty": 11,
-    "expression": "√40*9+8"
+    "expression": "√40/9+8"
   },
   "4809": {
     "difficulty": 11,
     "expression": "√4+80*9"
   },
   "4890": {
-    "difficulty": 12,
-    "expression": "√4+8+9*0"
+    "difficulty": 11,
+    "expression": "√4+89*0"
   },
   "4908": {
     "difficulty": 11,
@@ -29221,15 +29221,15 @@
   },
   "8094": {
     "difficulty": 11,
-    "expression": "80*9+√4"
+    "expression": "80/9+√4"
   },
   "8409": {
     "difficulty": 11,
     "expression": "8+√40*9"
   },
   "8490": {
-    "difficulty": 12,
-    "expression": "8+√4+9*0"
+    "difficulty": 11,
+    "expression": "8+√49*0"
   },
   "8904": {
     "difficulty": 11,
@@ -29261,7 +29261,7 @@
   },
   "9840": {
     "difficulty": 13,
-    "expression": "9*0√4+8"
+    "expression": "√4+89*0"
   },
   "4099": {
     "difficulty": 10,
@@ -31997,31 +31997,31 @@
   },
   "5055": {
     "difficulty": 7,
-    "expression": "50*5+5"
+    "expression": "50/5+5"
   },
   "5505": {
     "difficulty": 7,
     "expression": "5+50*5"
   },
   "5550": {
-    "difficulty": 8,
-    "expression": "5+5+5*0"
+    "difficulty": 7,
+    "expression": "5+55*0"
   },
   "5056": {
     "difficulty": 9,
-    "expression": "50*6+5"
+    "expression": "50/6+5"
   },
   "5065": {
     "difficulty": 7,
-    "expression": "50*6+5"
+    "expression": "50/6+5"
   },
   "5506": {
     "difficulty": 7,
     "expression": "5+50*6"
   },
   "5560": {
-    "difficulty": 8,
-    "expression": "5+5+6*0"
+    "difficulty": 7,
+    "expression": "5+56*0"
   },
   "5605": {
     "difficulty": 7,
@@ -32029,7 +32029,7 @@
   },
   "5650": {
     "difficulty": 9,
-    "expression": "5+6*05"
+    "expression": "0*65+5"
   },
   "6055": {
     "difficulty": 7,
@@ -32041,23 +32041,23 @@
   },
   "6550": {
     "difficulty": 9,
-    "expression": "6*05+5"
+    "expression": "5+56*0"
   },
   "5057": {
     "difficulty": 9,
-    "expression": "50*7+5"
+    "expression": "50/7+5"
   },
   "5075": {
     "difficulty": 7,
-    "expression": "50*7+5"
+    "expression": "50/7+5"
   },
   "5507": {
     "difficulty": 7,
     "expression": "5+50*7"
   },
   "5570": {
-    "difficulty": 8,
-    "expression": "5+5+7*0"
+    "difficulty": 7,
+    "expression": "5+57*0"
   },
   "5705": {
     "difficulty": 7,
@@ -32065,7 +32065,7 @@
   },
   "5750": {
     "difficulty": 9,
-    "expression": "5+7*05"
+    "expression": "0*75+5"
   },
   "7055": {
     "difficulty": 7,
@@ -32077,23 +32077,23 @@
   },
   "7550": {
     "difficulty": 9,
-    "expression": "7*05+5"
+    "expression": "5+57*0"
   },
   "5058": {
     "difficulty": 9,
-    "expression": "50*8+5"
+    "expression": "50/8+5"
   },
   "5085": {
     "difficulty": 7,
-    "expression": "50*8+5"
+    "expression": "50/8+5"
   },
   "5508": {
     "difficulty": 7,
     "expression": "5+50*8"
   },
   "5580": {
-    "difficulty": 8,
-    "expression": "5+5+8*0"
+    "difficulty": 7,
+    "expression": "5+58*0"
   },
   "5805": {
     "difficulty": 7,
@@ -32101,7 +32101,7 @@
   },
   "5850": {
     "difficulty": 9,
-    "expression": "5+8*05"
+    "expression": "0*85+5"
   },
   "8055": {
     "difficulty": 7,
@@ -32113,7 +32113,7 @@
   },
   "8550": {
     "difficulty": 9,
-    "expression": "8*05+5"
+    "expression": "5+58*0"
   },
   "5059": {
     "difficulty": 9,
@@ -32121,7 +32121,7 @@
   },
   "5095": {
     "difficulty": 7,
-    "expression": "50*9+5"
+    "expression": "50/9+5"
   },
   "5509": {
     "difficulty": 7,
@@ -32129,7 +32129,7 @@
   },
   "5590": {
     "difficulty": 7,
-    "expression": "5/5+90"
+    "expression": "5+59*0"
   },
   "5905": {
     "difficulty": 7,
@@ -32393,7 +32393,7 @@
   },
   "7059": {
     "difficulty": 11,
-    "expression": "70*5+√9"
+    "expression": "70/5+√9"
   },
   "7095": {
     "difficulty": 10,
@@ -35021,7 +35021,7 @@
   },
   "7990": {
     "difficulty": 11,
-    "expression": "7+9/√90"
+    "expression": "7+√99*0"
   },
   "9079": {
     "difficulty": 11,
@@ -35029,15 +35029,15 @@
   },
   "9097": {
     "difficulty": 11,
-    "expression": "√90*9+7"
+    "expression": "√90/9+7"
   },
   "9709": {
     "difficulty": 11,
     "expression": "√9+70*9"
   },
   "9790": {
-    "difficulty": 12,
-    "expression": "√9+7+9*0"
+    "difficulty": 11,
+    "expression": "√9+79*0"
   },
   "9907": {
     "difficulty": 11,

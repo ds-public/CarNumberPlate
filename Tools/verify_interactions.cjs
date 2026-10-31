@@ -185,9 +185,22 @@ global.document = {
 	{
 	}
 } ;
-global.window = { innerWidth: 1280, innerHeight: 720, addEventListener: () =>
+global.window = { innerWidth: 1280, innerHeight: 720, confirm: () => true, addEventListener: () =>
 {
 } } ;
+
+// ローカルストレージの模擬。既存の検証ではTipsを表示済みとして始める。
+const storage = new Map( [ [ "numberPlate.tutorialSeen", "1" ], [ "otherApp.key", "keep" ] ] ) ;
+global.localStorage = {
+	get length()
+	{
+		return storage.size ;
+	},
+	key: ( index ) => [ ...storage.keys() ][ index ] ?? null,
+	getItem: ( key ) => storage.get( key ) ?? null,
+	setItem: ( key, value ) => storage.set( key, String( value ) ),
+	removeItem: ( key ) => storage.delete( key )
+} ;
 
 // 初期化から画面遷移まで実際のゲームクラスを利用する。
 const game = new NumberPlateGame() ;
@@ -533,6 +546,41 @@ assert.equal( elements.get( "plate-result-value" ).textContent, "10" ) ;
 assert.equal( game.m_phase, "feedback" ) ;
 clock += 850 ;
 transition() ;
+
+// 初回プレイ時だけTipsで第1問の制限時間を止め、ゲーム開始で30秒から始める。
+storage.delete( "numberPlate.tutorialSeen" ) ;
+game.Start( 10 ) ;
+assert.equal( game.m_phase, "tips" ) ;
+assert.equal( elements.get( "tips-modal" ).hidden, false ) ;
+clock += 5000 ;
+game.BeginDrag( { button: 0, target: document.querySelectorAll( ".digit" )[ 0 ], clientX: 430, clientY: 350, preventDefault: () =>
+{
+} } ) ;
+assert.equal( game.m_drag, null, "Tips表示中は操作できない" ) ;
+elements.get( "tips-start-button" ).listeners.click() ;
+assert.equal( game.m_phase, "play" ) ;
+assert.equal( elements.get( "tips-modal" ).hidden, true ) ;
+assert.equal( elements.get( "time-value" ).textContent, "30.0" ) ;
+assert.equal( storage.get( "numberPlate.tutorialSeen" ), "1" ) ;
+game.Start( 10 ) ;
+assert.equal( game.m_phase, "play", "2回目以降はTipsを表示しない" ) ;
+
+// データ削除はこのゲームのキーだけを消し、問題数選択を開かない。
+game.ShowTitle() ;
+let propagationStopped = false ;
+elements.get( "data-delete-button" ).listeners.click( { stopPropagation: () =>
+{
+	propagationStopped = true ;
+} } ) ;
+assert( propagationStopped ) ;
+assert.equal( storage.has( "numberPlate.tutorialSeen" ), false ) ;
+assert.equal( storage.get( "otherApp.key" ), "keep" ) ;
+assert.equal( elements.get( "data-delete-button" ).textContent, "削除しました" ) ;
+transition() ;
+assert.equal( elements.get( "data-delete-button" ).textContent, "データ削除" ) ;
+game.Start( 10 ) ;
+assert.equal( game.m_phase, "tips", "削除後は再びTipsを表示する" ) ;
+elements.get( "tips-start-button" ).listeners.click() ;
 
 // 4種類すべてのモードを、保存済みの式の入力と実際の正解遷移で完走する。
 const solutions = JSON.parse( fs.readFileSync( require( "node:path" ).join( __dirname, "../Documents/難易度別解答例.json" ), "utf8" ) ) ;

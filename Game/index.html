@@ -35,6 +35,7 @@
 					</div>
 					<button id="start-button" class="primary-button" tabindex="-1">クリックしてはじめる <span>↗</span></button>
 					<p class="title-note" aria-label="数字と記号をドラッグして、答えを10に。"><span class="wave-text" aria-hidden="true">数字と記号をドラッグして、答えを<strong>10</strong>に。</span></p>
+					<button id="data-delete-button" class="text-button data-delete-button" tabindex="-1" title="この端末に保存したプレイ記録を削除">データ削除</button>
 					<p class="producer-credit">Produced by DS-Works<span id="version-label" class="version-label"></span></p>
 				</section>
 				<section id="play-screen" class="screen play-screen" hidden>
@@ -66,6 +67,19 @@
 				<footer class="game-footer"><span>NUMBER PLATE / MAKE TEN</span><span>マウス・タッチ操作であそべます</span></footer>
 				<div id="selection-modal" class="modal" hidden>
 					<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="selection-title"><button id="close-modal" class="close-modal" aria-label="閉じる" tabindex="-1">×</button><span class="eyebrow">SELECT YOUR DRIVE</span><h2 id="selection-title">何問、挑戦する？</h2><p>1問30秒。ひらめきの先へ。</p><div class="count-options"><button data-question-count="10" tabindex="-1"><strong>10<small>問</small></strong><span>ちょっとひと走り</span></button><button data-question-count="20" tabindex="-1"><strong>20<small>問</small></strong><span>気分転換のドライブ</span></button><button data-question-count="50" tabindex="-1"><strong>50<small>問</small></strong><span>じっくり遠出</span></button><button data-question-count="100" tabindex="-1"><strong>100<small>問</small></strong><span>ひらめきの長距離走</span></button></div><p id="data-error" class="data-error" hidden></p></div>
+				</div>
+				<div id="tips-modal" class="modal tips-modal" hidden>
+					<div class="tips-card" role="dialog" aria-modal="true" aria-labelledby="tips-text">
+						<div class="tips-stage" aria-hidden="true">
+							<div class="tips-plate"><span class="tips-digit">4</span><span class="tips-gap"><span class="tips-tile tips-placed" data-symbol="+">＋</span></span><span class="tips-digit">6</span></div>
+							<div class="tips-result"><span>=</span><span class="tips-result-value"><span class="tips-result-before">?</span><strong class="tips-result-after">10</strong></span></div>
+							<div class="tips-palette"><span class="tips-tile" data-symbol="+">＋</span><span class="tips-tile" data-symbol="-">−</span><span class="tips-tile" data-symbol="*">×</span><span class="tips-tile" data-symbol="/">÷</span></div>
+							<span class="tips-tile tips-ghost" data-symbol="+">＋</span>
+							<span class="tips-pointer"></span>
+						</div>
+						<p id="tips-text" class="tips-text">数の間に記号をドラッグして、結果が<strong>10</strong>になるような計算式を作ろう</p>
+						<button id="tips-start-button" class="primary-button tips-start-button" tabindex="-1">ゲーム開始 <span>↗</span></button>
+					</div>
 				</div>
 			</main>
 		</div>

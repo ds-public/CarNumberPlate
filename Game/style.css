@@ -51,6 +51,64 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 }
 .producer-credit { position: absolute; bottom: 2px; left: 0; right: 0; margin: 0; font-size: 12px; letter-spacing: 1.5px; color: #718268; }
 .version-label { display: block; margin-top: 5px; font-size: inherit; }
+.data-delete-button { position: absolute; right: 58px; bottom: 44px; font-size: 10px; letter-spacing: 1px; color: #9aa592; padding: 4px 6px; }
+.tips-modal { z-index: 20; }
+/* 1280×720の約60％の横長フレーム。上部約70％をアニメーション領域にする */
+.tips-card { width: 768px; height: 432px; padding: 14px 20px 18px; background: #faf9f1; border-radius: 20px; box-shadow: 0 20px 80px #12332935; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: default; }
+.tips-stage { position: relative; width: 728px; height: 274px; flex-shrink: 0; border-radius: 14px; background: #f1f1e6; overflow: hidden; }
+.tips-plate { position: absolute; left: 214px; top: 18px; width: 300px; height: 140px; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, #fffef5, #f1f0df); border: 3px solid #b9bfa5; border-radius: 16px; box-shadow: inset 0 0 0 4px #fffdf2, inset 0 0 0 6px #d7dac6, 0 10px 20px #31463115; color: #244f3e; }
+.tips-digit { width: 60px; font-family: "Bahnschrift", "Arial", sans-serif; font-size: 84px; font-weight: 700; line-height: 1; }
+.tips-gap { position: relative; width: 76px; height: 96px; border-radius: 6px; animation: tips-gap 3.6s ease-in-out infinite; }
+.tips-tile { width: 50px; height: 48px; border: 1px solid #d0d6c2; border-radius: 8px; background: var(--symbol-tint, #fdfcf3); color: #244f3e; font-family: "Arial", sans-serif; font-size: 26px; line-height: 1; box-shadow: 0 3px 0 #d5dac9; display: grid; place-items: center; }
+.tips-placed { position: absolute; left: 13px; top: 38px; animation: tips-placed 3.6s ease-in-out infinite; }
+.tips-result { position: absolute; left: 538px; top: 18px; height: 140px; display: flex; align-items: center; gap: 12px; color: #9ba58f; font-size: 34px; }
+.tips-result-value { position: relative; width: 70px; height: 50px; font-family: "Bahnschrift", sans-serif; font-size: 44px; line-height: 50px; text-align: left; }
+.tips-result-before, .tips-result-after { position: absolute; left: 0; top: 0; }
+.tips-result-before { color: #b0b8a5; animation: tips-before 3.6s ease-in-out infinite; }
+.tips-result-after { color: #568746; animation: tips-after 3.6s ease-in-out infinite; transform-origin: left center; }
+.tips-palette { position: absolute; left: 246px; top: 204px; display: flex; gap: 12px; }
+/* パレットの＋（中心 271, 228）から桁間のタイル位置（中心 364, 102）へ移動する */
+.tips-ghost { position: absolute; left: 246px; top: 204px; z-index: 2; border: 2px solid #587c4c; box-shadow: 0 8px 18px #213c2830; animation: tips-ghost 3.6s ease-in-out infinite; }
+.tips-pointer { position: absolute; left: 264px; top: 222px; z-index: 3; width: 26px; height: 26px; border-radius: 50%; background: #244f3e55; border: 2px solid #fffdf2; animation: tips-pointer 3.6s ease-in-out infinite; }
+.tips-text { margin: 12px 0 0; font-size: 19px; font-weight: 700; letter-spacing: 1px; color: #244f3e; }
+.tips-text strong { font-family: "Bahnschrift", sans-serif; font-size: 30px; color: #568746; margin: 0 2px; }
+.tips-start-button { margin-top: auto; padding: 12px 25px; }
+@keyframes tips-ghost {
+	0% { transform: translate(0, 0); opacity: 0; }
+	8% { transform: translate(0, 0) scale(1); opacity: 1; }
+	14% { transform: translate(0, 0) scale(1.08); opacity: 1; }
+	44% { transform: translate(93px, -126px) scale(1.08); opacity: 1; }
+	48% { transform: translate(93px, -126px) scale(1); opacity: 1; }
+	50%, 100% { transform: translate(93px, -126px) scale(1); opacity: 0; }
+}
+@keyframes tips-pointer {
+	0% { transform: translate(0, 0); opacity: 0; }
+	8% { transform: translate(0, 0) scale(1); opacity: 1; }
+	14% { transform: translate(0, 0) scale(.8); opacity: 1; }
+	44% { transform: translate(93px, -126px) scale(.8); opacity: 1; }
+	48% { transform: translate(93px, -126px) scale(1); opacity: 1; }
+	56%, 100% { transform: translate(93px, -126px) scale(1); opacity: 0; }
+}
+@keyframes tips-gap {
+	0%, 26%, 50%, 100% { background: transparent; outline: 2px dashed transparent; }
+	30%, 46% { background: #c6d8b888; outline: 2px dashed #7e9d6a; }
+}
+@keyframes tips-placed {
+	0%, 48% { opacity: 0; }
+	50%, 90% { opacity: 1; }
+	96%, 100% { opacity: 0; }
+}
+@keyframes tips-before {
+	0%, 48% { opacity: 1; }
+	50%, 92% { opacity: 0; }
+	96%, 100% { opacity: 1; }
+}
+@keyframes tips-after {
+	0%, 48% { opacity: 0; transform: scale(1); }
+	52% { opacity: 1; transform: scale(1.3); }
+	58%, 90% { opacity: 1; transform: scale(1); }
+	94%, 100% { opacity: 0; transform: scale(1); }
+}
 .game-footer { position: absolute; bottom: 22px; left: 58px; right: 58px; display: flex; justify-content: space-between; font-size: 9px; letter-spacing: 1.8px; color: #8d9787; pointer-events: none; }
 .modal { position: absolute; inset: 0; background: #153b3066; backdrop-filter: blur(7px); display: grid; place-items: center; z-index: 10; }
 .modal-card { background: #faf9f1; border-radius: 20px; width: 720px; padding: 48px 42px 40px; text-align: center; box-shadow: 0 20px 80px #12332935; position: relative; }

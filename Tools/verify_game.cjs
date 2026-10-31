@@ -107,6 +107,18 @@ for( const [ expression, expected ] of [ [ "8-02", "6" ], [ "8+02", "10" ], [ "8
 	assert.equal( result.value.ToDisplayString(), expected, expression ) ;
 }
 
+// 数字0との乗算の項は存在しない値とし、前後どちらに置いても加算記号を省略できる。
+for( const [ expression, expected ] of [ [ "0*12*5", "10" ], [ "2*50*1", "10" ], [ "1*02*5", "10" ], [ "2*51*0", "10" ], [ "0*1*25", "5" ], [ "3*00*45", "5" ], [ "8-0*25", "3" ], [ "8+0*25", "13" ], [ "-0*25", "-5" ], [ "0*(1+2)5", "5" ], [ "2*0√9", "3" ] ] )
+{
+	const result = Evaluate( expression ) ;
+	assert.equal( result.error, null, expression ) ;
+	assert.equal( result.value.ToDisplayString(), expected, expression ) ;
+}
+for( const expression of [ "10*25", "1*025", "0*125", "0/125", "2*3/0*15", "(0*1)25" ] )
+{
+	assert.notEqual( Evaluate( expression ).error, null, expression ) ;
+}
+
 for( const [ correct, iq ] of [ [ 0, 56 ], [ 1, 65 ], [ 2, 73 ], [ 3, 80 ], [ 4, 86 ], [ 5, 91 ], [ 6, 95 ], [ 7, 98 ], [ 8, 100 ], [ 9, 102 ], [ 10, 105 ], [ 11, 107 ], [ 12, 109 ], [ 13, 111 ], [ 14, 113 ], [ 15, 115 ], [ 16, 116 ], [ 17, 117 ], [ 18, 118 ], [ 19, 119 ], [ 20, 120 ], [ 21, 121 ], [ 35, 135 ], [ 50, 150 ], [ 75, 175 ], [ 100, 200 ] ] )
 {
 	assert.equal( CalculateIq( correct ), iq ) ;

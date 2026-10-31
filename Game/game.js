@@ -91,7 +91,7 @@ class Rational
 	}
 }
 
-/// <summary>各桁を個別に扱い、0に隣接する境界だけ加算の省略を認めて式を評価します。</summary>
+/// <summary>各桁を個別に扱い、0や0との乗算の項に隣接する境界だけ加算の省略を認めて式を評価します。</summary>
 class ExpressionParser
 {
 	/// <summary>数字と記号のトークン列。</summary>
@@ -105,6 +105,12 @@ class ExpressionParser
 
 	/// <summary>除数が0になり適用しなかった除算記号の識別子。</summary>
 	m_invalidDivisions = [] ;
+
+	/// <summary>0との乗算を含み、存在しない値として扱う項のトークン範囲。</summary>
+	m_vanishedTerms = [] ;
+
+	/// <summary>直前に読み取った乗除算の項が0との乗算を含むか。</summary>
+	m_lastProductVanished = false ;
 
 	/// <summary>評価するトークン列を設定します。</summary>
 	/// <param name="tokens">数字または記号を持つトークン列。</param>
@@ -137,8 +143,16 @@ class ExpressionParser
 	ValidateSeparators()
 	{
 		const operands = [ false ] ;
-		for( const token of this.m_tokens )
+		for( let index = 0 ; index < this.m_tokens.length ; index ++ )
 		{
+			// 0との乗算の項は存在しないものとし、前後の数字の間の記号の要否に影響させない。
+			const vanished = this.m_vanishedTerms.find( ( [ start, end ] ) => index >= start && index < end ) ;
+			if( vanished )
+			{
+				index = vanished[ 1 ] - 1 ;
+				continue ;
+			}
+			const token = this.m_tokens[ index ] ;
 			const level = operands.length - 1 ;
 			if( [ "+", "-", "*", "/" ].includes( token.symbol ) )
 			{
@@ -180,13 +194,14 @@ class ExpressionParser
 		return null ;
 	}
 
-	/// <summary>0の前後で省略された加算と、明示された加減算を左から評価します。</summary>
+	/// <summary>0や0との乗算の項の前後で省略された加算と、明示された加減算を左から評価します。</summary>
 	/// <returns>加減算の結果。</returns>
 	ReadSum()
 	{
 		let start = this.m_position ;
 		let value = this.ReadProduct() ;
-		let omittedSign = this.GetZeroContinuation( start, this.m_position, "+" ) ;
+		let vanished = this.EndTerm( start ) ;
+		let omittedSign = this.GetZeroContinuation( start, this.m_position, "+", vanished ) ;
 		while( this.m_position < this.m_tokens.length )
 		{
 			const token = this.Take( [ "+", "-" ] ) ;
@@ -194,7 +209,8 @@ class ExpressionParser
 			{
 				start = this.m_position ;
 				value = value.Calculate( token.symbol, this.ReadProduct() ) ;
-				omittedSign = this.GetZeroContinuation( start, this.m_position, token.symbol ) ;
+				vanished = this.EndTerm( start ) ;
+				omittedSign = this.GetZeroContinuation( start, this.m_position, token.symbol, vanished ) ;
 				continue ;
 			}
 			const next = this.m_tokens[ this.m_position ] ;
@@ -203,26 +219,55 @@ class ExpressionParser
 				break ;
 			}
 			const previous = this.m_tokens[ this.m_position - 1 ] ;
-			if( previous.digit !== 0 && next.digit !== 0 )
-			{
-				throw new Error( "0以外の数字の間には演算記号が必要です。" ) ;
-			}
+			const previousVanished = vanished ;
 
 			// 加減算の0を挟んでも符号を維持し、乗除算に使った0とは区別する。
 			start = this.m_position ;
-			value = value.Calculate( omittedSign, this.ReadProduct() ) ;
-			omittedSign = this.GetZeroContinuation( start, this.m_position, omittedSign ) ;
+			const term = this.ReadProduct() ;
+			vanished = this.EndTerm( start ) ;
+			if( previous.digit !== 0 && next.digit !== 0 && ! previousVanished && ! vanished )
+			{
+				throw new Error( "0以外の数字の間には演算記号が必要です。" ) ;
+			}
+			value = value.Calculate( omittedSign, term ) ;
+			omittedSign = this.GetZeroContinuation( start, this.m_position, omittedSign, vanished ) ;
 		}
 		return value ;
 	}
 
-	/// <summary>符号付きの0だけを読んだ場合、次の数字へ適用する加減算の符号を求めます。</summary>
+	/// <summary>読み取った項が0との乗算を含む場合、その範囲を存在しない項として記録します。</summary>
+	/// <param name="start">項の開始位置。</param>
+	/// <returns>0との乗算を含む項ならtrue。</returns>
+	EndTerm( start )
+	{
+		const vanished = this.m_lastProductVanished ;
+		if( vanished )
+		{
+			this.m_vanishedTerms.push( [ start, this.m_position ] ) ;
+		}
+		return vanished ;
+	}
+
+	/// <summary>符号付きの0や0との乗算の項だけを読んだ場合、次の数字へ適用する加減算の符号を求めます。</summary>
 	/// <param name="start">読み取った部分の開始位置。</param>
 	/// <param name="end">読み取った部分の末尾の次の位置。</param>
 	/// <param name="sign">0に適用された加減算記号。</param>
+	/// <param name="vanished">読み取った部分が0との乗算の項か。</param>
 	/// <returns>0の後へ引き継ぐ符号。乗除算などを含む場合は加算。</returns>
-	GetZeroContinuation( start, end, sign )
+	GetZeroContinuation( start, end, sign, vanished = false )
 	{
+		if( vanished )
+		{
+			// 0との乗算の項は存在しないものとし、項の先頭の単項符号だけを反映して引き継ぐ。
+			for( let index = start ; index < end && [ "+", "-" ].includes( this.m_tokens[ index ].symbol ) ; index ++ )
+			{
+				if( this.m_tokens[ index ].symbol === "-" )
+				{
+					sign = sign === "+" ? "-" : "+" ;
+				}
+			}
+			return sign ;
+		}
 		let hasZero = false ;
 		for( let index = start ; index < end ; index ++ )
 		{
@@ -243,15 +288,26 @@ class ExpressionParser
 		return hasZero ? sign : "+" ;
 	}
 
-	/// <summary>乗算と除算を左から評価します。</summary>
+	/// <summary>乗算と除算を左から評価し、数字0との乗算を含む項かを記録します。</summary>
 	/// <returns>乗除算の結果。</returns>
 	ReadProduct()
 	{
+		let start = this.m_position ;
 		let value = this.ReadUnary() ;
+		let zeroFactor = this.IsZeroFactor( start, this.m_position ) ;
+		let vanished = false ;
 		let token ;
 		while( ( token = this.Take( [ "*", "/" ] ) ) !== null )
 		{
+			start = this.m_position ;
 			const right = this.ReadUnary() ;
+			const rightZero = this.IsZeroFactor( start, this.m_position ) ;
+			if( token.symbol === "*" && ( zeroFactor || rightZero ) )
+			{
+				vanished = true ;
+			}
+			// 0除算で無視した除数の0は、後続の乗算の相手として扱わない。
+			zeroFactor = token.symbol === "*" && rightZero ;
 			if( token.symbol === "/" && right.m_numerator === 0n )
 			{
 				this.m_invalidDivisions.push( token.id ) ;
@@ -259,7 +315,18 @@ class ExpressionParser
 			}
 			value = value.Calculate( token.symbol, right ) ;
 		}
+		this.m_lastProductVanished = vanished ;
 		return value ;
+	}
+
+	/// <summary>指定範囲が単項符号付きの数字0だけで構成されるか確認します。</summary>
+	/// <param name="start">因数の開始位置。</param>
+	/// <param name="end">因数の末尾の次の位置。</param>
+	/// <returns>数字0の因数ならtrue。</returns>
+	IsZeroFactor( start, end )
+	{
+		const factor = this.m_tokens.slice( start, end ) ;
+		return factor.length > 0 && factor.at( -1 ).digit === 0 && factor.slice( 0, -1 ).every( ( token ) => token.symbol === "+" || token.symbol === "-" ) ;
 	}
 
 	/// <summary>単項符号と整数になる平方根を評価します。</summary>
@@ -355,6 +422,82 @@ function CalculateIq( correct )
 	return 200 ;
 }
 
+/// <summary>ブラウザーのローカルストレージに保存するプレイ記録を管理します。</summary>
+class PlayRecord
+{
+	/// <summary>このゲームが保存するキーの接頭辞。file:// では他のページと保存領域を共有するため付けます。</summary>
+	static m_prefix = "numberPlate." ;
+
+	/// <summary>初回プレイ時のTipsを表示済みかを保存するキー。</summary>
+	static m_tutorialKey = "numberPlate.tutorialSeen" ;
+
+	/// <summary>保存できない環境でも、同じページ内では表示済みとして扱うための記録。</summary>
+	static m_tutorialSeenInSession = false ;
+
+	/// <summary>初回プレイ時のTipsを表示済みか確認します。</summary>
+	/// <returns>表示済みならtrue。保存領域を読めない場合は、このページ内での表示有無を返します。</returns>
+	static HasSeenTutorial()
+	{
+		if( PlayRecord.m_tutorialSeenInSession )
+		{
+			return true ;
+		}
+		try
+		{
+			return localStorage.getItem( PlayRecord.m_tutorialKey ) === "1" ;
+		}
+		catch( error )
+		{
+			console.info( "保存データを読み込めません。", error ) ;
+			return false ;
+		}
+	}
+
+	/// <summary>初回プレイ時のTipsを表示済みとして保存します。</summary>
+	static MarkTutorialSeen()
+	{
+		PlayRecord.m_tutorialSeenInSession = true ;
+		try
+		{
+			localStorage.setItem( PlayRecord.m_tutorialKey, "1" ) ;
+		}
+		catch( error )
+		{
+			// プライベートモードなどでは保存できない。次回も初回として表示されるだけなので記録のみとする。
+			console.info( "保存データを書き込めません。", error ) ;
+		}
+	}
+
+	/// <summary>このゲームがローカルストレージに保存した内容をすべて削除します。</summary>
+	/// <returns>削除できた場合はtrue。</returns>
+	static Clear()
+	{
+		PlayRecord.m_tutorialSeenInSession = false ;
+		try
+		{
+			const keys = [] ;
+			for( let index = 0 ; index < localStorage.length ; index ++ )
+			{
+				const key = localStorage.key( index ) ;
+				if( key !== null && key.startsWith( PlayRecord.m_prefix ) )
+				{
+					keys.push( key ) ;
+				}
+			}
+			for( const key of keys )
+			{
+				localStorage.removeItem( key ) ;
+			}
+			return true ;
+		}
+		catch( error )
+		{
+			console.info( "保存データを削除できません。", error ) ;
+			return false ;
+		}
+	}
+}
+
 /// <summary>マウス操作によるゲーム進行と描画を管理します。</summary>
 class NumberPlateGame
 {
@@ -393,6 +536,9 @@ class NumberPlateGame
 
 	/// <summary>次の問題へ進む演出のタイマー。</summary>
 	m_transitionTimer = null ;
+
+	/// <summary>データ削除ボタンの表示を元に戻すタイマー。</summary>
+	m_dataDeleteTimer = null ;
 
 	/// <summary>タッチ操作でドラッグ中の記号を指より上に表示する距離（画面上のピクセル）。</summary>
 	static m_touchDragOffset = 64 ;
@@ -519,6 +665,13 @@ class NumberPlateGame
 		{
 			document.getElementById( "selection-modal" ).hidden = true ;
 		} ) ;
+		document.getElementById( "data-delete-button" ).addEventListener( "click", ( event ) =>
+		{
+			// タイトル画面のクリックによる問題数選択を開かない。
+			event.stopPropagation() ;
+			this.DeleteSavedData() ;
+		} ) ;
+		document.getElementById( "tips-start-button" ).addEventListener( "click", () => this.CloseTips() ) ;
 		for( const button of document.querySelectorAll( "[data-question-count]" ) )
 		{
 			button.addEventListener( "click", () => this.Start( Number( button.dataset.questionCount ) ) ) ;
@@ -606,6 +759,7 @@ class NumberPlateGame
 			screen.hidden = screen.id !== `${ name }-screen` ;
 		}
 		document.getElementById( "selection-modal" ).hidden = true ;
+		document.getElementById( "tips-modal" ).hidden = true ;
 		this.m_bgm?.SetScene( name === "result" ? ( this.m_phase === "clear" ? "clear" : "over" ) : name ) ;
 	}
 
@@ -636,6 +790,47 @@ class NumberPlateGame
 		this.m_usedIndices.clear() ;
 		this.ShowScreen( "play" ) ;
 		this.NextQuestion() ;
+		if( ! PlayRecord.HasSeenTutorial() )
+		{
+			this.ShowTips() ;
+		}
+	}
+
+	/// <summary>初回プレイ時に、第1問の制限時間を止めて遊び方のTipsを表示します。</summary>
+	ShowTips()
+	{
+		this.m_phase = "tips" ;
+		document.getElementById( "tips-modal" ).hidden = false ;
+	}
+
+	/// <summary>Tipsを表示済みとして保存し、制限時間を30秒から始めて第1問を開始します。</summary>
+	CloseTips()
+	{
+		if( this.m_phase !== "tips" )
+		{
+			return ;
+		}
+		PlayRecord.MarkTutorialSeen() ;
+		document.getElementById( "tips-modal" ).hidden = true ;
+		this.m_phase = "play" ;
+		this.m_deadline = performance.now() + 30000 ;
+		this.UpdateTime( performance.now() ) ;
+	}
+
+	/// <summary>確認の上でローカルストレージの保存データを削除し、結果をボタンに表示します。</summary>
+	DeleteSavedData()
+	{
+		if( ! window.confirm( "保存データ（チュートリアルの表示記録など）をすべて削除しますか？" ) )
+		{
+			return ;
+		}
+		const button = document.getElementById( "data-delete-button" ) ;
+		button.textContent = PlayRecord.Clear() ? "削除しました" : "削除できませんでした" ;
+		clearTimeout( this.m_dataDeleteTimer ) ;
+		this.m_dataDeleteTimer = setTimeout( () =>
+		{
+			button.textContent = "データ削除" ;
+		}, 2000 ) ;
 	}
 
 	/// <summary>未出題の問題を指定範囲から一様に選びます。</summary>
@@ -1413,5 +1608,5 @@ if( typeof document !== "undefined" )
 
 if( typeof module !== "undefined" )
 {
-	module.exports = { Rational, ExpressionParser, GetQuestionRange, CalculateIq, NumberPlateGame } ;
+	module.exports = { Rational, ExpressionParser, GetQuestionRange, CalculateIq, PlayRecord, NumberPlateGame } ;
 }

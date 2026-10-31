@@ -3,7 +3,7 @@
 import csv
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
 from functools import cache
 from itertools import permutations
@@ -29,10 +29,169 @@ def wrap(item):
                       item.head, item.tail)
 
 
-def has_required_separators(text):
-    """0を挟んだ非0数字や部分式の間にも、演算記号を必須にする。"""
+class ParseError(Exception):
+    """ゲームの評価規則で計算できない式。"""
+
+
+@dataclass(slots=True)
+class Parser:
+    """game.js の ExpressionParser と同じ規則で式を評価する。"""
+
+    text: str
+    position: int = 0
+    vanished_terms: list = field(default_factory=list)
+    last_product_vanished: bool = False
+    top_terms: list = field(default_factory=list)
+
+    def take(self, symbols):
+        """現在位置の記号が指定記号なら読み進める。"""
+        if self.position < len(self.text) and self.text[self.position] in symbols:
+            self.position += 1
+            return self.text[self.position - 1]
+        return None
+
+    def evaluate(self):
+        """式全体の値を返す。計算できなければNone。"""
+        try:
+            value = self.read_sum(True)
+            if self.position != len(self.text) or not has_required_separators(self.text, self.vanished_terms):
+                return None
+            return value
+        except (ParseError, ZeroDivisionError):
+            return None
+
+    def read_sum(self, top=False):
+        """0や0との乗算の項の前後で省略された加算と、明示された加減算を評価する。"""
+        start = self.position
+        value = self.read_product()
+        vanished = self.end_term(start, top)
+        sign = self.continuation(start, '+', vanished)
+        while self.position < len(self.text):
+            symbol = self.take('+-')
+            if symbol:
+                start = self.position
+                term = self.read_product()
+                value = value + term if symbol == '+' else value - term
+                vanished = self.end_term(start, top)
+                sign = self.continuation(start, symbol, vanished)
+                continue
+            following = self.text[self.position]
+            if following not in '0123456789(√':
+                break
+            previous = self.text[self.position - 1]
+            previous_vanished = vanished
+            start = self.position
+            term = self.read_product()
+            vanished = self.end_term(start, top)
+            if previous != '0' and following != '0' and not previous_vanished and not vanished:
+                raise ParseError
+            value = value + term if sign == '+' else value - term
+            sign = self.continuation(start, sign, vanished)
+        if top:
+            self.top_terms.append(sign)
+        return value
+
+    def end_term(self, start, top):
+        """0との乗算を含む項の範囲を記録する。"""
+        vanished = self.last_product_vanished
+        if vanished:
+            self.vanished_terms.append((start, self.position))
+        if top:
+            self.top_terms.append(vanished)
+        return vanished
+
+    def continuation(self, start, sign, vanished):
+        """符号付きの0や0との乗算の項の後へ引き継ぐ加減算の符号を求める。"""
+        part = self.text[start:self.position]
+        if vanished:
+            for symbol in part:
+                if symbol not in '+-':
+                    break
+                if symbol == '-':
+                    sign = '+' if sign == '-' else '-'
+            return sign
+        has_zero = False
+        for symbol in part:
+            if symbol == '0':
+                has_zero = True
+            elif symbol == '-':
+                sign = '+' if sign == '-' else '-'
+            elif symbol != '+':
+                return '+'
+        return sign if has_zero else '+'
+
+    def read_product(self):
+        """乗除算を評価し、数字0との乗算を含む項かを記録する。"""
+        start = self.position
+        value = self.read_unary()
+        zero_factor = is_zero_factor(self.text[start:self.position])
+        vanished = False
+        while (symbol := self.take('*/')) is not None:
+            start = self.position
+            right = self.read_unary()
+            right_zero = is_zero_factor(self.text[start:self.position])
+            if symbol == '*' and (zero_factor or right_zero):
+                vanished = True
+            # 0除算で無視した除数の0は、後続の乗算の相手として扱わない。
+            zero_factor = symbol == '*' and right_zero
+            if symbol == '/' and right == 0:
+                continue
+            value = value * right if symbol == '*' else value / right
+        self.last_product_vanished = vanished
+        return value
+
+    def read_unary(self):
+        """単項符号と整数になる平方根を評価する。"""
+        symbol = self.take('+-√')
+        if symbol is None:
+            return self.read_primary()
+        value = self.read_unary()
+        if symbol == '-':
+            return -value
+        if symbol == '√' and value.denominator == 1 and value >= 0:
+            root = isqrt(value.numerator)
+            if root * root == value:
+                return Fraction(root)
+        return value
+
+    def read_primary(self):
+        """1桁の数字または括弧内の式を読み取る。"""
+        if self.take('('):
+            value = self.read_sum()
+            if not self.take(')'):
+                raise ParseError
+            return value
+        if self.position >= len(self.text) or self.text[self.position] not in '0123456789':
+            raise ParseError
+        self.position += 1
+        return Fraction(int(self.text[self.position - 1]))
+
+
+def is_zero_factor(text):
+    """単項符号付きの数字0だけで構成される因数か判定する。"""
+    return text.endswith('0') and all(symbol in '+-' for symbol in text[:-1])
+
+
+@cache
+def analyze(text):
+    """連結時の省略可否に影響する、先頭・末尾の項が0との乗算か、末尾の後へ引き継ぐ符号を返す。"""
+    parser = Parser(text)
+    if parser.evaluate() is None:
+        return False, False, '+'
+    return parser.top_terms[0], parser.top_terms[-2], parser.top_terms[-1]
+
+
+def has_required_separators(text, vanished_terms=()):
+    """0を挟んだ非0数字や部分式の間にも、演算記号を必須にする。0との乗算の項は存在しないものとする。"""
     operands = [False]
-    for symbol in text:
+    index = 0
+    while index < len(text):
+        skipped = next((end for start, end in vanished_terms if start <= index < end), None)
+        if skipped is not None:
+            index = skipped
+            continue
+        symbol = text[index]
+        index += 1
         if symbol in '+-*/':
             operands[-1] = False
         elif symbol == ')':
@@ -51,22 +210,20 @@ def separator_context(text):
     """連結時の省略可否に影響する、両端の区間の非0数字を記録する。"""
     sections = re.split(r'[+*/()\-]', text)
     return (any(symbol in '123456789' for symbol in sections[0]),
-            any(symbol in '123456789' for symbol in sections[-1]), omitted_sign(text))
+            any(symbol in '123456789' for symbol in sections[-1]), analyze(text))
 
 
 def omitted_sign(text):
-    """末尾の加減算用の0の後へ引き継ぐ符号を返す。"""
-    match = re.search(r'([+-]*0+)$', text)
-    if match is None:
-        return 1
-    if match.start() > 0 and text[match.start() - 1] in '*/√':
-        return 1
-    return -1 if match.group().count('-') % 2 else 1
+    """末尾の0や0との乗算の項の後へ引き継ぐ符号を返す。"""
+    return -1 if analyze(text)[2] == '-' else 1
 
 
 def join(a, b, operator):
-    """優先順位と桁間の記号上限を守って式を連結する。"""
-    if operator == '' and not (a.text.endswith('0') or b.text.startswith('0')):
+    """優先順位と桁間の記号上限を守って式を連結し、ゲームと同じ規則で評価する。"""
+    if operator == '' and not (a.text.endswith('0') or b.text.startswith('0')
+                               or analyze(a.text)[1] or analyze(b.text)[0]):
+        return None
+    if operator == '/' and b.value == 0:
         return None
     precedence = 1 if operator in ('', '+', '-') else 2
     if a.precedence < precedence:
@@ -77,18 +234,9 @@ def join(a, b, operator):
     if a.tail + len(operator) + b.head > 2:
         return None
     text = f'{a.text}{operator}{b.text}'
-    if not has_required_separators(text):
+    value = Parser(text).evaluate()
+    if value is None:
         return None
-    if operator in ('', '+'):
-        value = a.value - b.value if negative_omission else a.value + b.value
-    elif operator == '-':
-        value = a.value - b.value
-    elif operator == '*':
-        value = a.value * b.value
-    else:
-        if b.value == 0:
-            return None
-        value = a.value / b.value
     return Expression(value, a.cost + b.cost + (precedence if operator else 0),
                       text, precedence, a.head, b.tail)
 
