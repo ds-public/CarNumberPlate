@@ -868,12 +868,13 @@ class NumberPlateGame
 		this.UpdateTime( performance.now() ) ;
 	}
 
-	/// <summary>プレイ画面のプレートの色の区分・地域名と分類番号・ひらがなをランダムに選びます。</summary>
+	/// <summary>プレイ画面のプレートの色の区分と、それに合う地域名と分類番号・ひらがなをランダムに選びます。</summary>
 	UpdatePlayPlate()
 	{
 		const data = globalThis.NumberPlateData ;
-		document.getElementById( "number-plate" ).dataset.plateType = data.CreateRandomPlateType() ;
-		document.getElementById( "region-name" ).textContent = data.CreateRandomHeader() ;
+		const plateType = data.CreateRandomPlateType() ;
+		document.getElementById( "number-plate" ).dataset.plateType = plateType ;
+		document.getElementById( "region-name" ).textContent = data.CreateRandomHeader( plateType ) ;
 		document.getElementById( "hiragana" ).textContent = data.CreateRandomHiragana() ;
 	}
 
@@ -881,8 +882,9 @@ class NumberPlateGame
 	UpdateTitlePlate()
 	{
 		const data = globalThis.NumberPlateData ;
-		document.getElementById( "title-plate" ).dataset.plateType = data.CreateRandomPlateType() ;
-		document.getElementById( "title-region" ).textContent = data.CreateRandomHeader() ;
+		const plateType = data.CreateRandomPlateType() ;
+		document.getElementById( "title-plate" ).dataset.plateType = plateType ;
+		document.getElementById( "title-region" ).textContent = data.CreateRandomHeader( plateType ) ;
 		document.getElementById( "title-hiragana" ).textContent = data.CreateRandomHiragana() ;
 
 		// 数値は出題される値から選ぶ。問題データを読めない場合は初期表示の数値を残す。

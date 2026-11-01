@@ -138,6 +138,25 @@ for( const [ value, type ] of [ [ 0, "white" ], [ .5699, "white" ], [ .5701, "ye
 }
 Math.random = random ;
 
+// 分類番号は、黄・黒（軽自動車）では先頭4～8の40・50・80と400～899だけ、白・緑では従来の1,110通りから選ぶ。
+const keiNumbers = globalThis.NumberPlateData.m_keiClassificationNumbers ;
+assert.equal( keiNumbers.length, 503 ) ;
+for( const number of keiNumbers )
+{
+	assert( /^[4-8]/.test( number ) && ( number.length === 3 || [ "40", "50", "80" ].includes( number ) ), number ) ;
+}
+for( let trial = 0 ; trial < 2000 ; trial ++ )
+{
+	for( const type of [ "yellow", "black" ] )
+	{
+		assert( keiNumbers.includes( globalThis.NumberPlateData.CreateRandomHeader( type ).split( " " )[ 1 ] ), type ) ;
+	}
+	for( const type of [ "white", "green" ] )
+	{
+		assert( globalThis.NumberPlateData.m_classificationNumbers.includes( globalThis.NumberPlateData.CreateRandomHeader( type ).split( " " )[ 1 ] ), type ) ;
+	}
+}
+
 // DOMに依存する画面切り替えを置き換え、実際の進行メソッドを検証する。
 const elements = new Map() ;
 global.document = {

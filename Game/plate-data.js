@@ -54,11 +54,18 @@ class NumberPlateData
 		"沖縄"
 	] ) ;
 
-	/// <summary>登録自動車の数字のみの分類番号。従来の1・2桁と3桁を区別して保持します。</summary>
+	/// <summary>登録自動車（白・緑）の数字のみの分類番号。従来の1・2桁と3桁を区別して保持します。先頭は0～9のすべてを使います。</summary>
 	static m_classificationNumbers = Object.freeze( [
 		...Array.from( { length: 10 }, ( _, index ) => String( index ) ),
 		...Array.from( { length: 100 }, ( _, index ) => String( index ).padStart( 2, "0" ) ),
 		...Array.from( { length: 1000 }, ( _, index ) => String( index ).padStart( 3, "0" ) )
+	] ) ;
+
+	/// <summary>軽自動車（黄・黒）の数字のみの分類番号。先頭は貨物の4・6、乗用の5・7、特種用途の8に限ります。
+	/// 2桁は3桁化（2005年）前の40・50・80だけとし、1桁はありません。</summary>
+	static m_keiClassificationNumbers = Object.freeze( [
+		"40", "50", "80",
+		...Array.from( { length: 500 }, ( _, index ) => String( 400 + index ) )
 	] ) ;
 
 	/// <summary>東北運輸局のかな文字一覧にある、登録自動車の全用途のひらがな。</summary>
@@ -95,12 +102,14 @@ class NumberPlateData
 		return this.m_plateTypes[ 0 ].name ;
 	}
 
-	/// <summary>地域名と分類番号をそれぞれ等確率で選び、上段の表示を生成します。</summary>
+	/// <summary>地域名と、色の区分に合う分類番号をそれぞれ等確率で選び、上段の表示を生成します。</summary>
+	/// <param name="plateType">white・yellow・green・blackのいずれか。黄・黒は軽自動車の分類番号から選びます。</param>
 	/// <returns>地域名と分類番号を空白で区切った文字列。</returns>
-	static CreateRandomHeader()
+	static CreateRandomHeader( plateType = "white" )
 	{
+		const numbers = plateType === "yellow" || plateType === "black" ? this.m_keiClassificationNumbers : this.m_classificationNumbers ;
 		const region = this.m_regionNames[ Math.floor( Math.random() * this.m_regionNames.length ) ] ;
-		const classification = this.m_classificationNumbers[ Math.floor( Math.random() * this.m_classificationNumbers.length ) ] ;
+		const classification = numbers[ Math.floor( Math.random() * numbers.length ) ] ;
 		return `${ region } ${ classification }` ;
 	}
 }
