@@ -1481,7 +1481,7 @@ class NumberPlateGame
 		return true ;
 	}
 
-	/// <summary>時間切れの問題の正解をプレイ画面に約2秒表示してから、ゲームオーバー画面へ進めます。</summary>
+	/// <summary>時間切れの問題の正解をプレイ画面に約5秒表示してから、ゲームオーバー画面へ進めます。</summary>
 	TimeUp()
 	{
 		if( this.m_phase !== "play" )
@@ -1507,7 +1507,7 @@ class NumberPlateGame
 		const feedback = document.getElementById( "feedback" ) ;
 		feedback.className = "feedback answer" ;
 		feedback.textContent = "TIME UP ― 正解はこちら" ;
-		this.m_transitionTimer = setTimeout( () => this.Finish( false ), 2000 ) ;
+		this.m_transitionTimer = setTimeout( () => this.Finish( false ), 5000 ) ;
 	}
 
 	/// <summary>現在の数字の並びのまま作れる正解の式を探し、作れなければ入れ替える位置が最も少ない並びの式を探します。</summary>
