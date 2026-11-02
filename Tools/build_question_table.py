@@ -24,8 +24,8 @@ class Expression:
 
 
 def wrap(item):
-    """子の演算順を保つために括弧を付ける。"""
-    return Expression(item.value, item.cost + 2, f"({item.text})", 4,
+    """子の演算順を保つために括弧を付ける。括弧は並べ替えの加点で代替されるため0ポイント。"""
+    return Expression(item.value, item.cost, f"({item.text})", 4,
                       item.head, item.tail)
 
 
@@ -261,7 +261,7 @@ def unary(item):
         if value.denominator == 1 and value > 1:
             root = isqrt(value.numerator)
             if root * root == value:
-                pending.append(Expression(Fraction(root), operand.cost + 4,
+                pending.append(Expression(Fraction(root), operand.cost + 5,
                                           '√' + operand.text, 3,
                                           min(3, operand.head + 1), operand.tail))
     return best.values()

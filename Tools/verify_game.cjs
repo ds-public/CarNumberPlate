@@ -56,7 +56,8 @@ for( let index = 0 ; index < rows.length ; index ++ )
 	let score = digits.length ;
 	for( const symbol of expression.replace( /[0-9]/g, "" ) )
 	{
-		score += symbol === "√" ? 4 : symbol === "*" || symbol === "/" ? 2 : 1 ;
+		// 括弧は並べ替えの加点で代替されるため0ポイントとする。
+		score += symbol === "√" ? 5 : symbol === "*" || symbol === "/" ? 2 : symbol === "(" || symbol === ")" ? 0 : 1 ;
 	}
 	score += digits.filter( ( digit, position ) => digit !== String( number )[ position ] ).length ;
 	assert.equal( score, difficulty ) ;
