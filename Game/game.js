@@ -704,7 +704,12 @@ class NumberPlateGame
 			if( event.button === 0 )
 			{
 				this.InitializeAudio() ;
-				this.PlaySoundEffect( "confirm" ) ;
+
+				// ダブルクリック・ダブルタップの2回目は削除のドロップ音だけを鳴らす。
+				if( ! this.IsDoubleTapPress( event ) )
+				{
+					this.PlaySoundEffect( "confirm" ) ;
+				}
 			}
 			this.BeginDrag( event ) ;
 		} ) ;
@@ -1321,12 +1326,35 @@ class NumberPlateGame
 	IsDoubleTap( tokenId, event )
 	{
 		const now = performance.now() ;
-		const last = this.m_lastTap ;
-		const isDouble = last !== null && last.tokenId === tokenId && now - last.time <= NumberPlateGame.m_doubleTapInterval && Math.hypot( event.clientX - last.x, event.clientY - last.y ) <= NumberPlateGame.m_doubleTapDistance ;
+		const isDouble = this.MatchesLastTap( tokenId, event, now ) ;
 
 		// 3回連続で押しても2回目で削除済みとなるよう、判定した操作は記録から外す。
 		this.m_lastTap = isDouble ? null : { tokenId: tokenId, time: now, x: event.clientX, y: event.clientY } ;
 		return isDouble ;
+	}
+
+	/// <summary>前回のクリック・タップ記録を変えずに、同じ記号を間隔・距離の範囲内で押したか判定します。</summary>
+	/// <param name="tokenId">クリック・タップした記号の識別子。</param>
+	/// <param name="event">ポインターのイベント。</param>
+	/// <param name="now">判定に使う現在時刻。</param>
+	/// <returns>前回と同じ記号を、間隔・距離の範囲内で押した場合はtrue。</returns>
+	MatchesLastTap( tokenId, event, now )
+	{
+		const last = this.m_lastTap ;
+		return last !== null && last.tokenId === tokenId && now - last.time <= NumberPlateGame.m_doubleTapInterval && Math.hypot( event.clientX - last.x, event.clientY - last.y ) <= NumberPlateGame.m_doubleTapDistance ;
+	}
+
+	/// <summary>押した瞬間に、配置済み記号へのダブルクリック・ダブルタップの2回目と見込めるか判定します。</summary>
+	/// <param name="event">ボタンや指を押したイベント。</param>
+	/// <returns>2回目の押下と見込める場合はtrue。</returns>
+	IsDoubleTapPress( event )
+	{
+		if( this.m_phase !== "play" )
+		{
+			return false ;
+		}
+		const target = event.target.closest( "[data-token-id]" ) ;
+		return target !== null && this.MatchesLastTap( Number( target.dataset.tokenId ), event, performance.now() ) ;
 	}
 
 	/// <summary>配置位置を保ち、桁間上限と先頭の禁止記号を守って記号を置き換えます。</summary>
