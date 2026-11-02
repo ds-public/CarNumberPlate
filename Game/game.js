@@ -1510,60 +1510,17 @@ class NumberPlateGame
 		this.m_transitionTimer = setTimeout( () => this.Finish( false ), 5000 ) ;
 	}
 
-	/// <summary>現在の数字の並びのまま作れる正解の式を探し、作れなければ入れ替える位置が最も少ない並びの式を探します。</summary>
-	/// <returns>数字と記号を並べた正解の式。解答データにない場合はnull。</returns>
+	/// <summary>出題中の問題の模範解答を返します。現在の数字の並びは問わず、記号の配置数が最も少ない式です。</summary>
+	/// <returns>数字と記号を並べた模範解答の式。解答データにない場合はnull。</returns>
 	FindAnswer()
 	{
 		const table = globalThis.NumberPlateAnswerTable ;
-		if( typeof table !== "object" || table === null )
+		const question = this.m_originalDigits.join( "" ) ;
+		if( typeof table !== "object" || table === null || ! Object.hasOwn( table, question ) )
 		{
 			return null ;
 		}
-		const current = this.m_digits.join( "" ) ;
-		if( Object.hasOwn( table, current ) )
-		{
-			return table[ current ] ;
-		}
-		let best = null ;
-		let bestChanges = Infinity ;
-		for( const order of this.GetDigitOrders( this.m_digits ) )
-		{
-			if( ! Object.hasOwn( table, order ) )
-			{
-				continue ;
-			}
-			const answer = table[ order ] ;
-			const changes = [ ...order ].filter( ( digit, index ) => Number( digit ) !== this.m_digits[ index ] ).length ;
-
-			// 入れ替えが同じ数なら、記号の少ない短い式を優先する。
-			if( changes < bestChanges || ( changes === bestChanges && answer.length < best.length ) )
-			{
-				best = answer ;
-				bestChanges = changes ;
-			}
-		}
-		return best ;
-	}
-
-	/// <summary>数字の並べ替えで作れる、重複のない並びを列挙します。</summary>
-	/// <param name="digits">並べ替える数字の配列。</param>
-	/// <returns>数字を連ねた文字列の集合。</returns>
-	GetDigitOrders( digits )
-	{
-		if( digits.length <= 1 )
-		{
-			return new Set( [ digits.join( "" ) ] ) ;
-		}
-		const orders = new Set() ;
-		for( let index = 0 ; index < digits.length ; index ++ )
-		{
-			const rest = [ ...digits.slice( 0, index ), ...digits.slice( index + 1 ) ] ;
-			for( const order of this.GetDigitOrders( rest ) )
-			{
-				orders.add( `${ digits[ index ] }${ order }` ) ;
-			}
-		}
-		return orders ;
+		return table[ question ] ;
 	}
 
 	/// <summary>正解の式の数字の並びと記号をプレートに配置します。</summary>

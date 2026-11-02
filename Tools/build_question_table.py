@@ -11,6 +11,10 @@ from math import isqrt
 from pathlib import Path
 
 
+# 記号ごとの加点。難易度算定の値を既定とし、模範解答の生成では記号数を優先する値に差し替える。
+COSTS = {'paren': 0, 'add': 1, 'mul': 2, 'negative': 1, 'root': 5}
+
+
 @dataclass(frozen=True, slots=True)
 class Expression:
     """値・記号コスト・優先順位・両端の記号数を保持する。"""
@@ -25,7 +29,7 @@ class Expression:
 
 def wrap(item):
     """子の演算順を保つために括弧を付ける。括弧は並べ替えの加点で代替されるため0ポイント。"""
-    return Expression(item.value, item.cost, f"({item.text})", 4,
+    return Expression(item.value, item.cost + COSTS['paren'], f"({item.text})", 4,
                       item.head, item.tail)
 
 
@@ -237,7 +241,8 @@ def join(a, b, operator):
     value = Parser(text).evaluate()
     if value is None:
         return None
-    return Expression(value, a.cost + b.cost + (precedence if operator else 0),
+    operator_cost = COSTS['add'] if operator in ('+', '-') else COSTS['mul'] if operator else 0
+    return Expression(value, a.cost + b.cost + operator_cost,
                       text, precedence, a.head, b.tail)
 
 
@@ -254,14 +259,14 @@ def unary(item):
         best[key] = current
         operand = wrap(current) if current.precedence < 3 else current
         if current.value != 0:
-            negative = Expression(-current.value, operand.cost + 1, '-' + operand.text,
+            negative = Expression(-current.value, operand.cost + COSTS['negative'], '-' + operand.text,
                                   3, min(3, operand.head + 1), operand.tail)
             pending.append(negative)
         value = current.value
         if value.denominator == 1 and value > 1:
             root = isqrt(value.numerator)
             if root * root == value:
-                pending.append(Expression(Fraction(root), operand.cost + 5,
+                pending.append(Expression(Fraction(root), operand.cost + COSTS['root'],
                                           '√' + operand.text, 3,
                                           min(3, operand.head + 1), operand.tail))
     return best.values()
