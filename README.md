@@ -1,6 +1,6 @@
 # ナンバープレート
 
-[ゲームをプレイ](./Game/index.html)
+[ゲームをプレイ](https://ds-public.github.io/CarNumberPlate/Game/)
 
 **車を運転している時に考えてるアレ**
 
