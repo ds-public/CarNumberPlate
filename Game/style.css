@@ -160,12 +160,13 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .digit-target { background: #b7d2a799 !important; outline: 2px dashed #6d9461; }
 .number-dash { font-size: 45px; width: 14.4px; text-align: center; font-weight: 700; color: inherit; transform: translateY(-6px) scaleX(.6); pointer-events: none; flex-shrink: 0; }
 .gap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 16px; min-height: 98px; padding: 0 8px; border-radius: 6px; position: relative; }
-.gap:has(.placed-symbol)::after { content: ""; position: absolute; right: 8px; top: calc(50% + 13px); height: 18px; border-left: 1px dashed #a5b398; pointer-events: none; }
+.gap:has(.placed-symbol)::after { content: ""; position: absolute; right: 8px; top: calc(50% - 9px); height: 18px; border-left: 1px dashed #a5b398; pointer-events: none; }
 .gap.drop-target { background: #c6d8b888; outline: 2px dashed #7e9d6a; }
 .insertion-target { position: fixed; z-index: 90; pointer-events: none; background: #c6d8b888; outline: 2px dashed #7e9d6a; border-radius: 6px; }
 .gap.insertion-active::after, .gap.insertion-active .placed-symbol::before { opacity: 0; }
 .gap.drop-rejected { background: #e9bdb188; outline-color: #b56450; }
-.placed-symbol { flex-shrink: 0; position: relative; margin: 0 18px; transform: translateY(22px); }
+/* 桁間の中央に置いた記号タイルの下端が、数字の下端（ベースライン）と揃う */
+.placed-symbol { flex-shrink: 0; position: relative; margin: 0 18px; }
 .placed-symbol::before { content: ""; position: absolute; left: -18px; top: 17px; height: 18px; border-left: 1px dashed #a5b398; pointer-events: none; }
 .placed-symbol:hover { border-color: #6f9360; background: var(--symbol-tint, #e5edda); }
 .placed-symbol.replace-target { border-color: #4b7b42; background: var(--symbol-tint, #dce9ce); outline: 2px dashed #739561; outline-offset: 2px; }
@@ -179,6 +180,7 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .solved-result { color: #568746 !important; }
 .feedback { height: 28px; text-align: center; color: #87907e; font-size: 12px; letter-spacing: 1px; }
 .feedback.success { color: #3a7343; font-size: 18px; font-weight: 700; }
+.feedback.answer { color: #b5503b; font-size: 18px; font-weight: 700; }
 .tool-tray { display: flex; width: max-content; margin: 9px auto 0; padding: 15px 23px; align-items: center; gap: 20px; border: 1px solid #dce0d1; border-radius: 14px; background: #eeeee2; }
 .tool-label { font-size: 10px; color: #8c957e; writing-mode: vertical-rl; letter-spacing: 1px; }
 .symbol-palette { display: flex; gap: 9px; }
@@ -194,7 +196,6 @@ h1 { font-size: 66px; letter-spacing: 7px; margin: 13px 0 5px; font-weight: 900;
 .instructions b { color: #62775a; margin-right: 7px; font-weight: 600; }
 .text-button { background: none; color: #7d8b74; font-size: 11px; }
 .text-button:hover { color: #244f3e; }
-.reset-button { display: block; margin: 16px auto 0; }
 .drag-ghost { position: fixed; z-index: 100; pointer-events: none; transform: translate(-50%, -50%); border: 2px solid #587c4c; border-radius: 10px; background: #fffef2ef; min-width: 52px; height: 60px; padding: 0 8px; color: #244f3e; text-align: center; line-height: 56px; font-size: 38px; font-family: "Bahnschrift", "Arial", sans-serif; box-shadow: 0 10px 25px #213c2830; }
 .dragging, .dragging * { cursor: grabbing !important; }
 .drag-ghost.delete-ghost { border-color: #bd5b47; color: #bd5b47; opacity: .75; }

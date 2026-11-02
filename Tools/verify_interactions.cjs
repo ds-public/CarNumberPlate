@@ -4,6 +4,7 @@ const assert = require( "node:assert/strict" ) ;
 const fs = require( "node:fs" ) ;
 const { NumberPlateGame } = require( "../Game/game.js" ) ;
 require( "../Game/questions.js" ) ;
+require( "../Game/answers.js" ) ;
 require( "../Game/plate-data.js" ) ;
 require( "../Game/bgm.js" ) ;
 require( "../Game/version.js" ) ;
@@ -312,11 +313,15 @@ assert.equal( game.m_gaps[ 1 ].length, 0 ) ;
 clock += 15000 ;
 game.UpdateTime( clock ) ;
 assert.equal( elements.get( "time-value" ).textContent, "15.0" ) ;
-elements.get( "reset-button" ).listeners.click() ;
-game.UpdateTime( clock ) ;
-assert.equal( elements.get( "time-value" ).textContent, "15.0" ) ;
+game.ResetExpression() ;
 clock += 15000 ;
 game.UpdateTime( clock ) ;
+
+// 時間切れでは、ゲームオーバー画面の前に正解の式をプレイ画面に表示する。
+assert.equal( game.m_phase, "reveal" ) ;
+assert.equal( elements.get( "plate-result-value" ).textContent, "10" ) ;
+assert.equal( document.querySelectorAll( ".number-dash" ).length, 0, "記号の配置中は区切りハイフンを表示しない" ) ;
+transition() ;
 assert.equal( game.m_phase, "over" ) ;
 assert.equal( game.m_bgm.m_desiredScene, "over" ) ;
 assert.equal( elements.get( "result-title" ).textContent, "ゲームオーバー" ) ;
@@ -653,5 +658,5 @@ for( const total of [ 10, 20, 50, 100 ] )
 	assert.equal( game.m_phase, "clear" ) ;
 	assert.equal( game.m_usedIndices.size, total ) ;
 }
-console.log( "PASS: initialization, title popup, question selection, mouse symbol insertion, digit swap, leading zero, invalid sqrt, right-click deletion, timer/reset, next question, game over, clear, replay, title return, and 16:9 scaling (simulated DOM)." ) ;
+console.log( "PASS: initialization, title popup, question selection, mouse symbol insertion, digit swap, leading zero, invalid sqrt, right-click deletion, timer, next question, answer reveal, game over, clear, replay, title return, and 16:9 scaling (simulated DOM)." ) ;
 console.log( "PASS: completed all 10/20/50/100-question modes through actual evaluation and screen transitions." ) ;

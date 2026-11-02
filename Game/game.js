@@ -687,13 +687,6 @@ class NumberPlateGame
 		}
 		document.getElementById( "retry-button" ).addEventListener( "click", () => this.Start( this.m_total ) ) ;
 		document.getElementById( "title-button" ).addEventListener( "click", () => this.ShowTitle() ) ;
-		document.getElementById( "reset-button" ).addEventListener( "click", () =>
-		{
-			if( this.m_phase === "play" && this.CheckTime() )
-			{
-				this.ResetExpression() ;
-			}
-		} ) ;
 		// マウスとタッチを同じ処理で扱うため Pointer Events を使う。2本目以降の指は無視する。
 		this.m_root.addEventListener( "pointerdown", ( event ) =>
 		{
@@ -955,6 +948,9 @@ class NumberPlateGame
 		row.replaceChildren() ;
 		const padding = Math.max( 0, 4 - this.m_digits.length ) ;
 		const leadingZeros = this.m_digits.findIndex( ( digit ) => digit !== 0 ) ;
+
+		// 記号を1つでも配置している間は、減算記号と紛れないよう中央の区切りハイフンを表示しない。
+		const showDash = this.m_gaps.every( ( items ) => items.length === 0 ) ;
 		for( let index = 0 ; index < padding ; index ++ )
 		{
 			const empty = document.createElement( "span" ) ;
@@ -964,7 +960,7 @@ class NumberPlateGame
 		}
 		for( let index = 0 ; index <= this.m_digits.length ; index ++ )
 		{
-			if( index + padding === 2 )
+			if( index + padding === 2 && showDash )
 			{
 				const dash = document.createElement( "span" ) ;
 				dash.className = "number-dash" ;
@@ -1479,10 +1475,116 @@ class NumberPlateGame
 	{
 		if( performance.now() >= this.m_deadline )
 		{
-			this.Finish( false ) ;
+			this.TimeUp() ;
 			return false ;
 		}
 		return true ;
+	}
+
+	/// <summary>時間切れの問題の正解をプレイ画面に約2秒表示してから、ゲームオーバー画面へ進めます。</summary>
+	TimeUp()
+	{
+		if( this.m_phase !== "play" )
+		{
+			return ;
+		}
+		this.CancelDrag() ;
+		clearTimeout( this.m_transitionTimer ) ;
+		const answer = this.FindAnswer() ;
+
+		// 解答データを読めない場合も、ゲームオーバーへの遷移は止めない。
+		if( answer === null )
+		{
+			this.Finish( false ) ;
+			return ;
+		}
+		this.m_phase = "reveal" ;
+
+		// 操作時に時間切れを検出した場合も、表示中の残り時間を0にそろえる。
+		document.getElementById( "time-value" ).textContent = "0.0" ;
+		document.getElementById( "time-fill" ).style.transform = "scaleX(0)" ;
+		this.ApplyAnswer( answer ) ;
+		const feedback = document.getElementById( "feedback" ) ;
+		feedback.className = "feedback answer" ;
+		feedback.textContent = "TIME UP ― 正解はこちら" ;
+		this.m_transitionTimer = setTimeout( () => this.Finish( false ), 2000 ) ;
+	}
+
+	/// <summary>現在の数字の並びのまま作れる正解の式を探し、作れなければ入れ替える位置が最も少ない並びの式を探します。</summary>
+	/// <returns>数字と記号を並べた正解の式。解答データにない場合はnull。</returns>
+	FindAnswer()
+	{
+		const table = globalThis.NumberPlateAnswerTable ;
+		if( typeof table !== "object" || table === null )
+		{
+			return null ;
+		}
+		const current = this.m_digits.join( "" ) ;
+		if( Object.hasOwn( table, current ) )
+		{
+			return table[ current ] ;
+		}
+		let best = null ;
+		let bestChanges = Infinity ;
+		for( const order of this.GetDigitOrders( this.m_digits ) )
+		{
+			if( ! Object.hasOwn( table, order ) )
+			{
+				continue ;
+			}
+			const answer = table[ order ] ;
+			const changes = [ ...order ].filter( ( digit, index ) => Number( digit ) !== this.m_digits[ index ] ).length ;
+
+			// 入れ替えが同じ数なら、記号の少ない短い式を優先する。
+			if( changes < bestChanges || ( changes === bestChanges && answer.length < best.length ) )
+			{
+				best = answer ;
+				bestChanges = changes ;
+			}
+		}
+		return best ;
+	}
+
+	/// <summary>数字の並べ替えで作れる、重複のない並びを列挙します。</summary>
+	/// <param name="digits">並べ替える数字の配列。</param>
+	/// <returns>数字を連ねた文字列の集合。</returns>
+	GetDigitOrders( digits )
+	{
+		if( digits.length <= 1 )
+		{
+			return new Set( [ digits.join( "" ) ] ) ;
+		}
+		const orders = new Set() ;
+		for( let index = 0 ; index < digits.length ; index ++ )
+		{
+			const rest = [ ...digits.slice( 0, index ), ...digits.slice( index + 1 ) ] ;
+			for( const order of this.GetDigitOrders( rest ) )
+			{
+				orders.add( `${ digits[ index ] }${ order }` ) ;
+			}
+		}
+		return orders ;
+	}
+
+	/// <summary>正解の式の数字の並びと記号をプレートに配置します。</summary>
+	/// <param name="answer">数字と記号を並べた正解の式。</param>
+	ApplyAnswer( answer )
+	{
+		this.m_digits = [] ;
+		this.m_gaps = [ [] ] ;
+		for( const character of answer )
+		{
+			if( /[0-9]/.test( character ) )
+			{
+				this.m_digits.push( Number( character ) ) ;
+				this.m_gaps.push( [] ) ;
+			}
+			else
+			{
+				this.m_gaps.at( -1 ).push( { symbol: character, id: this.m_nextTokenId ++ } ) ;
+			}
+		}
+		this.RenderExpression( false ) ;
 	}
 
 	/// <summary>正解を記録し、短い演出の後に進めます。</summary>
@@ -1631,7 +1733,7 @@ class NumberPlateGame
 		this.m_root.classList.toggle( "low-time", remaining <= 5 ) ;
 		if( remaining <= 0 )
 		{
-			this.Finish( false ) ;
+			this.TimeUp() ;
 		}
 	}
 

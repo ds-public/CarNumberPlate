@@ -362,6 +362,9 @@ def main():
         json.dump(witnesses, output, ensure_ascii=False, indent=2)
         output.write('\n')
     print(f'Completed {len(rows)} questions, difficulty {rows[0][1]}-{rows[-1][1]}', flush=True)
+    # ゲームオーバー時に表示する正解の式も必ず同期する。
+    from build_answer_table import main as build_answers
+    build_answers()
 
 
 if __name__ == '__main__':
